@@ -35,6 +35,8 @@
     "otherModules": [],
     "enableTranslation": true,
     "nativeLanguage": "es",
-    "languages": ["es", "en"]
+    "languages": ["es", "en"],
+    "herokuAppName": "quiet-atoll-94383",
+    "herokuDeployType": "git"
   }
 }
