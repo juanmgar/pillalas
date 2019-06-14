@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.juanmagarcia.pillalas",
+      "nativeLanguage": "es"
+    },
+    "jhipsterVersion": "6.0.1",
+    "applicationType": "monolith",
+    "baseName": "pillalasAlVuelo",
+    "packageName": "com.juanmagarcia.pillalas",
+    "packageFolder": "com/juanmagarcia/pillalas",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "OWY0Zjc3NzYwMDU0NzNhMzIxMDllNjFiNTcxNTBkOTY0OTgxY2I4MDhjYTQyNGZkZmRkMGIzNzAwMjBiZDNlNjI1ODA3ZDk4N2Y0MzdjNTU1ZmYwYzlkZDFhMDE4YmRmZWVhNmI3NWY1ZmMwMjYxZGQ1ZGRiZjE4MDFmYjJhNzE=",
+    "clientFramework": "angularX",
+    "clientTheme": "minty",
+    "clientThemeVariant": "primary",
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "es",
+    "languages": ["es", "en"]
+  }
+}
