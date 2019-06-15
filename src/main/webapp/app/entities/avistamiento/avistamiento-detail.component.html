@@ -37,6 +37,10 @@
                 </dd>
             </dl>
 
+            <agm-map [latitude]="latitude" [longitude]="longitude">
+                <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+        </agm-map>
+
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">

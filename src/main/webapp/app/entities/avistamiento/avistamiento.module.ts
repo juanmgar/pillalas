@@ -4,6 +4,7 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { JhiLanguageHelper } from 'app/core';
 
 import { PillalasAlVueloSharedModule } from 'app/shared';
+import { AgmCoreModule } from '@agm/core';
 import {
   AvistamientoComponent,
   AvistamientoDetailComponent,
@@ -17,7 +18,13 @@ import {
 const ENTITY_STATES = [...avistamientoRoute, ...avistamientoPopupRoute];
 
 @NgModule({
-  imports: [PillalasAlVueloSharedModule, RouterModule.forChild(ENTITY_STATES)],
+  imports: [
+    PillalasAlVueloSharedModule,
+    RouterModule.forChild(ENTITY_STATES),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA3oNg0Hg98Mscqm-9I-HxTV-q-Wu7vMTI'
+    })
+  ],
   declarations: [
     AvistamientoComponent,
     AvistamientoDetailComponent,
