@@ -36,7 +36,7 @@
     "enableTranslation": true,
     "nativeLanguage": "es",
     "languages": ["es", "en"],
-    "herokuAppName": "quiet-atoll-94383",
+    "herokuAppName": "tranquil-eyrie-81982",
     "herokuDeployType": "git"
   }
 }
