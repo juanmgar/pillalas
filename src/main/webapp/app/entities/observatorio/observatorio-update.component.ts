@@ -7,8 +7,7 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IObservatorio, Observatorio } from 'app/shared/model/observatorio.model';
 import { ObservatorioService } from './observatorio.service';
-import { IFotografia } from 'app/shared/model/fotografia.model';
-import { FotografiaService } from 'app/entities/fotografia';
+import { IUser, UserService } from 'app/core';
 import { IAve } from 'app/shared/model/ave.model';
 import { AveService } from 'app/entities/ave';
 
@@ -17,9 +16,10 @@ import { AveService } from 'app/entities/ave';
   templateUrl: './observatorio-update.component.html'
 })
 export class ObservatorioUpdateComponent implements OnInit {
+  observatorio: IObservatorio;
   isSaving: boolean;
 
-  fotografias: IFotografia[];
+  users: IUser[];
 
   aves: IAve[];
 
@@ -28,10 +28,10 @@ export class ObservatorioUpdateComponent implements OnInit {
     nombre: [null, [Validators.required]],
     latitud: [null, [Validators.required]],
     longitud: [null, [Validators.required]],
+    descripcion: [],
     foto: [],
     fotoContentType: [],
-    descripcion: [],
-    observatorios: [],
+    autor: [],
     aves: []
   });
 
@@ -39,7 +39,7 @@ export class ObservatorioUpdateComponent implements OnInit {
     protected dataUtils: JhiDataUtils,
     protected jhiAlertService: JhiAlertService,
     protected observatorioService: ObservatorioService,
-    protected fotografiaService: FotografiaService,
+    protected userService: UserService,
     protected aveService: AveService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
@@ -50,14 +50,15 @@ export class ObservatorioUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ observatorio }) => {
       this.updateForm(observatorio);
+      this.observatorio = observatorio;
     });
-    this.fotografiaService
+    this.userService
       .query()
       .pipe(
-        filter((mayBeOk: HttpResponse<IFotografia[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IFotografia[]>) => response.body)
+        filter((mayBeOk: HttpResponse<IUser[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IUser[]>) => response.body)
       )
-      .subscribe((res: IFotografia[]) => (this.fotografias = res), (res: HttpErrorResponse) => this.onError(res.message));
+      .subscribe((res: IUser[]) => (this.users = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.aveService
       .query()
       .pipe(
@@ -73,10 +74,10 @@ export class ObservatorioUpdateComponent implements OnInit {
       nombre: observatorio.nombre,
       latitud: observatorio.latitud,
       longitud: observatorio.longitud,
+      descripcion: observatorio.descripcion,
       foto: observatorio.foto,
       fotoContentType: observatorio.fotoContentType,
-      descripcion: observatorio.descripcion,
-      observatorios: observatorio.observatorios,
+      autor: observatorio.autor,
       aves: observatorio.aves
     });
   }
@@ -144,10 +145,10 @@ export class ObservatorioUpdateComponent implements OnInit {
       nombre: this.editForm.get(['nombre']).value,
       latitud: this.editForm.get(['latitud']).value,
       longitud: this.editForm.get(['longitud']).value,
+      descripcion: this.editForm.get(['descripcion']).value,
       fotoContentType: this.editForm.get(['fotoContentType']).value,
       foto: this.editForm.get(['foto']).value,
-      descripcion: this.editForm.get(['descripcion']).value,
-      observatorios: this.editForm.get(['observatorios']).value,
+      autor: this.editForm.get(['autor']).value,
       aves: this.editForm.get(['aves']).value
     };
     return entity;
@@ -169,7 +170,7 @@ export class ObservatorioUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackFotografiaById(index: number, item: IFotografia) {
+  trackUserById(index: number, item: IUser) {
     return item.id;
   }
 

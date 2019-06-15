@@ -32,7 +32,11 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="descripcion" type="varchar(255)">
+            <column name="descripcion" type="clob">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="autor_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
@@ -54,10 +58,11 @@
         <loadData
                   file="config/liquibase/data/avistamiento.csv"
                   separator=";"
-                  tableName="avistamiento">
+                  tableName="avistamiento"
+                  context="dev">
             <column name="id" type="numeric"/>
             <column name="nombre" type="string"/>
-            <column name="fecha" type="datetime"/>
+            <column name="fecha" type="date"/>
             <column name="latitud" type="string"/>
             <column name="longitud" type="string"/>
             <column name="descripcion" type="string"/>
@@ -66,17 +71,6 @@
 
     <changeSet id="20190615103456-1-relations" author="jhipster">
 
-        <createTable tableName="avistamiento_foto">
-            <column name="foto_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="avistamiento_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="avistamiento_id, foto_id" tableName="avistamiento_foto"/>
-        
         <createTable tableName="avistamiento_ave">
             <column name="ave_id" type="bigint">
                 <constraints nullable="false"/>

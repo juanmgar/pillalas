@@ -4,8 +4,7 @@
       "home": {
         "title": "Avistamientos",
         "createLabel": "Crear nuevo Avistamiento",
-        "createOrEditLabel": "Crear o editar Avistamiento",
-        "notFound": "No Avistamiento found"
+        "createOrEditLabel": "Crear o editar Avistamiento"
       },
       "created": "Un nuevo Avistamiento ha sido creado con el identificador {{ param }}",
       "updated": "Un Avistamiento ha sido actualizado con el identificador {{ param }}",
@@ -21,7 +20,7 @@
       "latitud": "Latitud",
       "longitud": "Longitud",
       "descripcion": "Descripcion",
-      "foto": "Foto",
+      "autor": "Autor",
       "ave": "Ave"
     }
   }

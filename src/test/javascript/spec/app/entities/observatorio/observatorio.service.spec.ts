@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(ObservatorioService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Observatorio(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'image/png', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Observatorio(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'image/png', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -62,8 +62,8 @@ describe('Service Tests', () => {
             nombre: 'BBBBBB',
             latitud: 'BBBBBB',
             longitud: 'BBBBBB',
-            foto: 'BBBBBB',
-            descripcion: 'BBBBBB'
+            descripcion: 'BBBBBB',
+            foto: 'BBBBBB'
           },
           elemDefault
         );
@@ -84,8 +84,8 @@ describe('Service Tests', () => {
             nombre: 'BBBBBB',
             latitud: 'BBBBBB',
             longitud: 'BBBBBB',
-            foto: 'BBBBBB',
-            descripcion: 'BBBBBB'
+            descripcion: 'BBBBBB',
+            foto: 'BBBBBB'
           },
           elemDefault
         );

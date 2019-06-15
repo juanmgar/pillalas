@@ -17,7 +17,8 @@
         },
         {
             "fieldName": "descripcion",
-            "fieldType": "String"
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         },
         {
             "fieldName": "foto",
@@ -32,10 +33,19 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-many",
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "ave",
+            "relationshipName": "autor",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
             "otherEntityName": "fotografia",
             "otherEntityRelationshipName": "ave",
-            "relationshipName": "foto"
+            "relationshipName": "foto",
+            "otherEntityField": "id",
+            "ownerSide": false
         },
         {
             "relationshipType": "many-to-many",

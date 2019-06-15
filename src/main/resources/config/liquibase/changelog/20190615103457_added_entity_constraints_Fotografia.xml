@@ -8,11 +8,35 @@
     -->
     <changeSet id="20190615103457-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="ave_id"
+        <addForeignKeyConstraint baseColumnNames="avistamiento_id"
                                  baseTableName="fotografia"
-                                 constraintName="fk_fotografia_ave_id"
+                                 constraintName="fk_fotografia_avistamiento_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="avistamiento"/>
+
+        <addForeignKeyConstraint baseColumnNames="observatorio_id"
+                                 baseTableName="fotografia"
+                                 constraintName="fk_fotografia_observatorio_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="observatorio"/>
+
+        <addForeignKeyConstraint baseColumnNames="autor_id"
+                                 baseTableName="fotografia"
+                                 constraintName="fk_fotografia_autor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="fotografia_id"
+                                 baseTableName="fotografia_ave"
+                                 constraintName="fk_fotografia_ave_fotografia_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fotografia"/>
+
+        <addForeignKeyConstraint baseColumnNames="ave_id"
+                                 baseTableName="fotografia_ave"
+                                 constraintName="fk_fotografia_ave_ave_id"
                                  referencedColumnNames="id"
                                  referencedTableName="ave"/>
-
+        
     </changeSet>
 </databaseChangeLog>

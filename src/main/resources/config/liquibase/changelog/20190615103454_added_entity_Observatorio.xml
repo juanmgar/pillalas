@@ -28,6 +28,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="descripcion" type="clob">
+                <constraints nullable="true" />
+            </column>
+
             <column name="foto" type="longblob">
                 <constraints nullable="true" />
             </column>
@@ -35,7 +39,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="descripcion" type="varchar(255)">
+            <column name="autor_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
@@ -56,30 +60,20 @@
         <loadData
                   file="config/liquibase/data/observatorio.csv"
                   separator=";"
-                  tableName="observatorio">
+                  tableName="observatorio"
+                  context="dev">
             <column name="id" type="numeric"/>
             <column name="nombre" type="string"/>
             <column name="latitud" type="string"/>
             <column name="longitud" type="string"/>
-            <column name="foto" type="blob"/>
-            <column name="foto_content_type" type="string"/>
             <column name="descripcion" type="string"/>
+            <column name="foto" type="string"/>
+            <column name="foto_content_type" type="string"/>
         </loadData>
     </changeSet>
 
     <changeSet id="20190615103454-1-relations" author="jhipster">
 
-        <createTable tableName="observatorio_observatorio">
-            <column name="observatorio_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="observatorio_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="observatorio_id, observatorio_id" tableName="observatorio_observatorio"/>
-        
         <createTable tableName="observatorio_ave">
             <column name="ave_id" type="bigint">
                 <constraints nullable="false"/>

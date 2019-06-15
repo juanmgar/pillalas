@@ -4,7 +4,7 @@
             <h2 id="jhi-ave-heading" jhiTranslate="pillalasAlVueloApp.ave.home.createOrEditLabel">Create or edit a Ave</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!editForm.get('id').value">
+                <div class="form-group" [hidden]="!ave.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
@@ -33,8 +33,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.ave.descripcion" for="field_descripcion">Descripcion</label>
-                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
-                           formControlName="descripcion"/>
+                    <textarea class="form-control" name="descripcion" id="field_descripcion"
+                              formControlName="descripcion"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.ave.foto" for="field_foto">Foto</label>
@@ -72,6 +72,13 @@
                            formControlName="sonidoContentType" />
                 </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.ave.autor" for="field_autor">Autor</label>
+                    <select class="form-control" id="field_autor" name="autor" formControlName="autor">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('autor').value?.id ? editForm.get('autor').value : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">

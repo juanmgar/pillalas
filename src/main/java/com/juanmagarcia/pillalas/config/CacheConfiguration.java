@@ -56,6 +56,8 @@ public class CacheConfiguration {
             createCache(cm, com.juanmagarcia.pillalas.domain.Fotografia.class.getName());
             createCache(cm, com.juanmagarcia.pillalas.domain.Fotografia.class.getName() + ".avistamientos");
             createCache(cm, com.juanmagarcia.pillalas.domain.Fotografia.class.getName() + ".observatorios");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Observatorio.class.getName() + ".fotos");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Fotografia.class.getName() + ".aves");
             // jhipster-needle-ehcache-add-entry
         };
     }

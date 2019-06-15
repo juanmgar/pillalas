@@ -8,9 +8,12 @@ import com.juanmagarcia.pillalas.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -21,11 +24,13 @@ import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.juanmagarcia.pillalas.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -45,6 +50,12 @@ public class FotografiaResourceIT {
 
     @Autowired
     private FotografiaRepository fotografiaRepository;
+
+    @Mock
+    private FotografiaRepository fotografiaRepositoryMock;
+
+    @Mock
+    private FotografiaService fotografiaServiceMock;
 
     @Autowired
     private FotografiaService fotografiaService;
@@ -168,6 +179,39 @@ public class FotografiaResourceIT {
             .andExpect(jsonPath("$.[*].fichero").value(hasItem(Base64Utils.encodeToString(DEFAULT_FICHERO))));
     }
     
+    @SuppressWarnings({"unchecked"})
+    public void getAllFotografiasWithEagerRelationshipsIsEnabled() throws Exception {
+        FotografiaResource fotografiaResource = new FotografiaResource(fotografiaServiceMock);
+        when(fotografiaServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        MockMvc restFotografiaMockMvc = MockMvcBuilders.standaloneSetup(fotografiaResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restFotografiaMockMvc.perform(get("/api/fotografias?eagerload=true"))
+        .andExpect(status().isOk());
+
+        verify(fotografiaServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public void getAllFotografiasWithEagerRelationshipsIsNotEnabled() throws Exception {
+        FotografiaResource fotografiaResource = new FotografiaResource(fotografiaServiceMock);
+            when(fotografiaServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+            MockMvc restFotografiaMockMvc = MockMvcBuilders.standaloneSetup(fotografiaResource)
+            .setCustomArgumentResolvers(pageableArgumentResolver)
+            .setControllerAdvice(exceptionTranslator)
+            .setConversionService(createFormattingConversionService())
+            .setMessageConverters(jacksonMessageConverter).build();
+
+        restFotografiaMockMvc.perform(get("/api/fotografias?eagerload=true"))
+        .andExpect(status().isOk());
+
+            verify(fotografiaServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
     @Test
     @Transactional
     public void getFotografia() throws Exception {

@@ -10,10 +10,7 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="alert alert-warning" *ngIf="aves?.length === 0">
-        <span jhiTranslate="pillalasAlVueloApp.ave.home.notFound">No aves found</span>
-    </div>
-    <div class="table-responsive" *ngIf="aves?.length > 0">
+    <div class="table-responsive" *ngIf="aves">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
@@ -23,6 +20,7 @@
             <th jhiSortBy="descripcion"><span jhiTranslate="pillalasAlVueloApp.ave.descripcion">Descripcion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="foto"><span jhiTranslate="pillalasAlVueloApp.ave.foto">Foto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="sonido"><span jhiTranslate="pillalasAlVueloApp.ave.sonido">Sonido</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="autor.id"><span jhiTranslate="pillalasAlVueloApp.ave.autor">Autor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -41,6 +39,9 @@
                 <td>
                     <a *ngIf="ave.sonido" (click)="openFile(ave.sonidoContentType, ave.sonido)" jhiTranslate="entity.action.open">open</a>
                     <span *ngIf="ave.sonido">{{ave.sonidoContentType}}, {{byteSize(ave.sonido)}}</span>
+                </td>
+                <td>
+                    {{ave.autor?.id}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group">
@@ -70,7 +71,7 @@
             </tbody>
         </table>
     </div>
-    <div [hidden]="aves?.length === 0">
+    <div *ngIf="aves && aves.length">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

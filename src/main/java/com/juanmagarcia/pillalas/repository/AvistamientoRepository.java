@@ -16,14 +16,17 @@ import java.util.Optional;
 @Repository
 public interface AvistamientoRepository extends JpaRepository<Avistamiento, Long> {
 
-    @Query(value = "select distinct avistamiento from Avistamiento avistamiento left join fetch avistamiento.fotos left join fetch avistamiento.aves",
+    @Query("select avistamiento from Avistamiento avistamiento where avistamiento.autor.login = ?#{principal.username}")
+    List<Avistamiento> findByAutorIsCurrentUser();
+
+    @Query(value = "select distinct avistamiento from Avistamiento avistamiento left join fetch avistamiento.aves",
         countQuery = "select count(distinct avistamiento) from Avistamiento avistamiento")
     Page<Avistamiento> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query("select distinct avistamiento from Avistamiento avistamiento left join fetch avistamiento.fotos left join fetch avistamiento.aves")
+    @Query("select distinct avistamiento from Avistamiento avistamiento left join fetch avistamiento.aves")
     List<Avistamiento> findAllWithEagerRelationships();
 
-    @Query("select avistamiento from Avistamiento avistamiento left join fetch avistamiento.fotos left join fetch avistamiento.aves where avistamiento.id =:id")
+    @Query("select avistamiento from Avistamiento avistamiento left join fetch avistamiento.aves where avistamiento.id =:id")
     Optional<Avistamiento> findOneWithEagerRelationships(@Param("id") Long id);
 
 }

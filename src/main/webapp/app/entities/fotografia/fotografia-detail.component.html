@@ -18,11 +18,27 @@
                         {{fotografia.ficheroContentType}}, {{byteSize(fotografia.fichero)}}
                     </div>
                 </dd>
+                <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.avistamiento">Avistamiento</span></dt>
+                <dd>
+                    <div *ngIf="fotografia.avistamiento">
+                        <a [routerLink]="['/avistamiento', fotografia.avistamiento?.id, 'view']">{{fotografia.avistamiento?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.observatorio">Observatorio</span></dt>
+                <dd>
+                    <div *ngIf="fotografia.observatorio">
+                        <a [routerLink]="['/observatorio', fotografia.observatorio?.id, 'view']">{{fotografia.observatorio?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.autor">Autor</span></dt>
+                <dd>
+                    {{fotografia.autor?.id}}
+                </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.ave">Ave</span></dt>
                 <dd>
-                    <div *ngIf="fotografia.ave">
-                        <a [routerLink]="['/ave', fotografia.ave?.id, 'view']">{{fotografia.ave?.id}}</a>
-                    </div>
+                    <span *ngFor="let ave of fotografia.aves; let last = last">
+                        <a [routerLink]="['/ave', ave?.id, 'view' ]">{{ave.id}}</a>{{last ? '' : ', '}}
+                    </span>
                 </dd>
             </dl>
 

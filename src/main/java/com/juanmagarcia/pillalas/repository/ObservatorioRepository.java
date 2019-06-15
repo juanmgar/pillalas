@@ -16,14 +16,17 @@ import java.util.Optional;
 @Repository
 public interface ObservatorioRepository extends JpaRepository<Observatorio, Long> {
 
-    @Query(value = "select distinct observatorio from Observatorio observatorio left join fetch observatorio.observatorios left join fetch observatorio.aves",
+    @Query("select observatorio from Observatorio observatorio where observatorio.autor.login = ?#{principal.username}")
+    List<Observatorio> findByAutorIsCurrentUser();
+
+    @Query(value = "select distinct observatorio from Observatorio observatorio left join fetch observatorio.aves",
         countQuery = "select count(distinct observatorio) from Observatorio observatorio")
     Page<Observatorio> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query("select distinct observatorio from Observatorio observatorio left join fetch observatorio.observatorios left join fetch observatorio.aves")
+    @Query("select distinct observatorio from Observatorio observatorio left join fetch observatorio.aves")
     List<Observatorio> findAllWithEagerRelationships();
 
-    @Query("select observatorio from Observatorio observatorio left join fetch observatorio.observatorios left join fetch observatorio.aves where observatorio.id =:id")
+    @Query("select observatorio from Observatorio observatorio left join fetch observatorio.aves where observatorio.id =:id")
     Optional<Observatorio> findOneWithEagerRelationships(@Param("id") Long id);
 
 }

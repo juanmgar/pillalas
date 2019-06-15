@@ -4,7 +4,7 @@
             <h2 id="jhi-observatorio-heading" jhiTranslate="pillalasAlVueloApp.observatorio.home.createOrEditLabel">Create or edit a Observatorio</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!editForm.get('id').value">
+                <div class="form-group" [hidden]="!observatorio.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
@@ -43,6 +43,11 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.observatorio.descripcion" for="field_descripcion">Descripcion</label>
+                    <textarea class="form-control" name="descripcion" id="field_descripcion"
+                              formControlName="descripcion"></textarea>
+                </div>
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.observatorio.foto" for="field_foto">Foto</label>
                     <div>
                         <img [src]="'data:' + editForm.get('fotoContentType').value + ';base64,' + editForm.get('foto').value" style="max-height: 100px;" *ngIf="editForm.get('foto').value" alt="observatorio image"/>
@@ -59,16 +64,12 @@
                     <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType"
                            formControlName="fotoContentType" />
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.observatorio.descripcion" for="field_descripcion">Descripcion</label>
-                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
-                           formControlName="descripcion"/>
-                </div>
 
                 <div class="form-group">
-                    <label jhiTranslate="pillalasAlVueloApp.observatorio.observatorio" for="field_observatorios">Observatorio</label>
-                    <select class="form-control" id="field_observatorios" multiple name="observatorios" formControlName="observatorios">
-                        <option [ngValue]="getSelected(editForm.get('observatorios').value, fotografiaOption)" *ngFor="let fotografiaOption of fotografias; trackBy: trackFotografiaById">{{fotografiaOption.id}}</option>
+                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.observatorio.autor" for="field_autor">Autor</label>
+                    <select class="form-control" id="field_autor" name="autor" formControlName="autor">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('autor').value?.id ? editForm.get('autor').value : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">

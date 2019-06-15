@@ -8,18 +8,12 @@
     -->
     <changeSet id="20190615103456-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="avistamiento_id"
-                                 baseTableName="avistamiento_foto"
-                                 constraintName="fk_avistamiento_foto_avistamiento_id"
+        <addForeignKeyConstraint baseColumnNames="autor_id"
+                                 baseTableName="avistamiento"
+                                 constraintName="fk_avistamiento_autor_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="avistamiento"/>
+                                 referencedTableName="jhi_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="foto_id"
-                                 baseTableName="avistamiento_foto"
-                                 constraintName="fk_avistamiento_foto_foto_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="fotografia"/>
-        
         <addForeignKeyConstraint baseColumnNames="avistamiento_id"
                                  baseTableName="avistamiento_ave"
                                  constraintName="fk_avistamiento_ave_avistamiento_id"

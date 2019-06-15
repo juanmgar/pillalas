@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { IFotografia } from 'app/shared/model/fotografia.model';
+import { IUser } from 'app/core/user/user.model';
 import { IAve } from 'app/shared/model/ave.model';
 
 export interface IAvistamiento {
@@ -8,8 +8,8 @@ export interface IAvistamiento {
   fecha?: Moment;
   latitud?: string;
   longitud?: string;
-  descripcion?: string;
-  fotos?: IFotografia[];
+  descripcion?: any;
+  autor?: IUser;
   aves?: IAve[];
 }
 
@@ -20,8 +20,8 @@ export class Avistamiento implements IAvistamiento {
     public fecha?: Moment,
     public latitud?: string,
     public longitud?: string,
-    public descripcion?: string,
-    public fotos?: IFotografia[],
+    public descripcion?: any,
+    public autor?: IUser,
     public aves?: IAve[]
   ) {}
 }

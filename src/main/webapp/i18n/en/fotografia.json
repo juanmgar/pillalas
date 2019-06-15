@@ -4,8 +4,7 @@
       "home": {
         "title": "Fotografias",
         "createLabel": "Create a new Fotografia",
-        "createOrEditLabel": "Create or edit a Fotografia",
-        "notFound": "No Fotografia found"
+        "createOrEditLabel": "Create or edit a Fotografia"
       },
       "created": "A new Fotografia is created with identifier {{ param }}",
       "updated": "A Fotografia is updated with identifier {{ param }}",
@@ -18,9 +17,10 @@
       },
       "nombre": "Nombre",
       "fichero": "Fichero",
-      "ave": "Ave",
       "avistamiento": "Avistamiento",
-      "observatorio": "Observatorio"
+      "observatorio": "Observatorio",
+      "autor": "Autor",
+      "ave": "Ave"
     }
   }
 }

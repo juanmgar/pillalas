@@ -1,5 +1,8 @@
 package com.juanmagarcia.pillalas.domain;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,6 +12,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A Ave.
@@ -32,6 +36,7 @@ public class Ave implements Serializable {
     @Column(name = "nombre_cientifico", nullable = false)
     private String nombreCientifico;
 
+    @Lob
     @Column(name = "descripcion")
     private String descripcion;
 
@@ -49,8 +54,13 @@ public class Ave implements Serializable {
     @Column(name = "sonido_content_type")
     private String sonidoContentType;
 
-    @OneToMany(mappedBy = "ave")
+    @ManyToOne
+    @JsonIgnoreProperties("aves")
+    private User autor;
+
+    @ManyToMany(mappedBy = "aves")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
     private Set<Fotografia> fotos = new HashSet<>();
 
     @ManyToMany(mappedBy = "aves")
@@ -163,6 +173,19 @@ public class Ave implements Serializable {
         this.sonidoContentType = sonidoContentType;
     }
 
+    public User getAutor() {
+        return autor;
+    }
+
+    public Ave autor(User user) {
+        this.autor = user;
+        return this;
+    }
+
+    public void setAutor(User user) {
+        this.autor = user;
+    }
+
     public Set<Fotografia> getFotos() {
         return fotos;
     }
@@ -174,13 +197,13 @@ public class Ave implements Serializable {
 
     public Ave addFoto(Fotografia fotografia) {
         this.fotos.add(fotografia);
-        fotografia.setAve(this);
+        fotografia.getAves().add(this);
         return this;
     }
 
     public Ave removeFoto(Fotografia fotografia) {
         this.fotos.remove(fotografia);
-        fotografia.setAve(null);
+        fotografia.getAves().remove(this);
         return this;
     }
 

@@ -10,17 +10,16 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="alert alert-warning" *ngIf="fotografias?.length === 0">
-        <span jhiTranslate="pillalasAlVueloApp.fotografia.home.notFound">No fotografias found</span>
-    </div>
-    <div class="table-responsive" *ngIf="fotografias?.length > 0">
+    <div class="table-responsive" *ngIf="fotografias">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nombre"><span jhiTranslate="pillalasAlVueloApp.fotografia.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fichero"><span jhiTranslate="pillalasAlVueloApp.fotografia.fichero">Fichero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="ave.id"><span jhiTranslate="pillalasAlVueloApp.fotografia.ave">Ave</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="avistamiento.id"><span jhiTranslate="pillalasAlVueloApp.fotografia.avistamiento">Avistamiento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="observatorio.id"><span jhiTranslate="pillalasAlVueloApp.fotografia.observatorio">Observatorio</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="autor.id"><span jhiTranslate="pillalasAlVueloApp.fotografia.autor">Autor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -35,9 +34,17 @@
                     <span *ngIf="fotografia.fichero">{{fotografia.ficheroContentType}}, {{byteSize(fotografia.fichero)}}</span>
                 </td>
                 <td>
-                    <div *ngIf="fotografia.ave">
-                        <a [routerLink]="['../ave', fotografia.ave?.id, 'view' ]" >{{fotografia.ave?.id}}</a>
+                    <div *ngIf="fotografia.avistamiento">
+                        <a [routerLink]="['../avistamiento', fotografia.avistamiento?.id, 'view' ]" >{{fotografia.avistamiento?.id}}</a>
                     </div>
+                </td>
+                <td>
+                    <div *ngIf="fotografia.observatorio">
+                        <a [routerLink]="['../observatorio', fotografia.observatorio?.id, 'view' ]" >{{fotografia.observatorio?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{fotografia.autor?.id}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group">
@@ -67,7 +74,7 @@
             </tbody>
         </table>
     </div>
-    <div [hidden]="fotografias?.length === 0">
+    <div *ngIf="fotografias && fotografias.length">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

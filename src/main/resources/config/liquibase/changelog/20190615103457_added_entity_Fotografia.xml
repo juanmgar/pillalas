@@ -27,7 +27,15 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="ave_id" type="bigint">
+            <column name="avistamiento_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="observatorio_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="autor_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
@@ -48,16 +56,28 @@
         <loadData
                   file="config/liquibase/data/fotografia.csv"
                   separator=";"
-                  tableName="fotografia">
+                  tableName="fotografia"
+                  context="dev">
             <column name="id" type="numeric"/>
             <column name="nombre" type="string"/>
-            <column name="fichero" type="blob"/>
+            <column name="fichero" type="string"/>
             <column name="fichero_content_type" type="string"/>
         </loadData>
     </changeSet>
 
     <changeSet id="20190615103457-1-relations" author="jhipster">
 
+        <createTable tableName="fotografia_ave">
+            <column name="ave_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fotografia_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="fotografia_id, ave_id" tableName="fotografia_ave"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

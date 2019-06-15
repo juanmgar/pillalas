@@ -14,26 +14,32 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "ave",
-            "otherEntityRelationshipName": "foto",
-            "relationshipName": "ave",
+            "otherEntityName": "avistamiento",
+            "otherEntityRelationshipName": "fotografia",
+            "relationshipName": "avistamiento",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "observatorio",
+            "otherEntityRelationshipName": "fotografia",
+            "relationshipName": "observatorio",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "fotografia",
+            "relationshipName": "autor",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityName": "avistamiento",
+            "otherEntityName": "ave",
             "otherEntityRelationshipName": "foto",
-            "relationshipName": "avistamiento",
+            "relationshipName": "ave",
             "otherEntityField": "id",
-            "ownerSide": false
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "observatorio",
-            "otherEntityRelationshipName": "observatorio",
-            "relationshipName": "observatorio",
-            "otherEntityField": "id",
-            "ownerSide": false
+            "ownerSide": true
         }
     ],
     "changelogDate": "20190615103457",

@@ -4,8 +4,7 @@
       "home": {
         "title": "Observatorios",
         "createLabel": "Crear nuevo Observatorio",
-        "createOrEditLabel": "Crear o editar Observatorio",
-        "notFound": "No Observatorio found"
+        "createOrEditLabel": "Crear o editar Observatorio"
       },
       "created": "Un nuevo Observatorio ha sido creado con el identificador {{ param }}",
       "updated": "Un Observatorio ha sido actualizado con el identificador {{ param }}",
@@ -19,9 +18,9 @@
       "nombre": "Nombre",
       "latitud": "Latitud",
       "longitud": "Longitud",
-      "foto": "Foto",
       "descripcion": "Descripcion",
-      "observatorio": "Observatorio",
+      "foto": "Foto",
+      "autor": "Autor",
       "ave": "Ave"
     }
   }

@@ -10,10 +10,7 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="alert alert-warning" *ngIf="observatorios?.length === 0">
-        <span jhiTranslate="pillalasAlVueloApp.observatorio.home.notFound">No observatorios found</span>
-    </div>
-    <div class="table-responsive" *ngIf="observatorios?.length > 0">
+    <div class="table-responsive" *ngIf="observatorios">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
@@ -21,8 +18,9 @@
             <th jhiSortBy="nombre"><span jhiTranslate="pillalasAlVueloApp.observatorio.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="latitud"><span jhiTranslate="pillalasAlVueloApp.observatorio.latitud">Latitud</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="longitud"><span jhiTranslate="pillalasAlVueloApp.observatorio.longitud">Longitud</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="foto"><span jhiTranslate="pillalasAlVueloApp.observatorio.foto">Foto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="descripcion"><span jhiTranslate="pillalasAlVueloApp.observatorio.descripcion">Descripcion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="foto"><span jhiTranslate="pillalasAlVueloApp.observatorio.foto">Foto</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="autor.id"><span jhiTranslate="pillalasAlVueloApp.observatorio.autor">Autor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -32,13 +30,16 @@
                 <td>{{observatorio.nombre}}</td>
                 <td>{{observatorio.latitud}}</td>
                 <td>{{observatorio.longitud}}</td>
+                <td>{{observatorio.descripcion}}</td>
                 <td>
                     <a *ngIf="observatorio.foto" (click)="openFile(observatorio.fotoContentType, observatorio.foto)">
                         <img [src]="'data:' + observatorio.fotoContentType + ';base64,' + observatorio.foto" style="max-height: 30px;" alt="observatorio image"/>
                     </a>
                     <span *ngIf="observatorio.foto">{{observatorio.fotoContentType}}, {{byteSize(observatorio.foto)}}</span>
                 </td>
-                <td>{{observatorio.descripcion}}</td>
+                <td>
+                    {{observatorio.autor?.id}}
+                </td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
@@ -67,7 +68,7 @@
             </tbody>
         </table>
     </div>
-    <div [hidden]="observatorios?.length === 0">
+    <div *ngIf="observatorios && observatorios.length">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>

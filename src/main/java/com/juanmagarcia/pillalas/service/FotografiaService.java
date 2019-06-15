@@ -28,7 +28,13 @@ public interface FotografiaService {
      */
     Page<Fotografia> findAll(Pageable pageable);
 
-
+    /**
+     * Get all the fotografias with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    Page<Fotografia> findAllWithEagerRelationships(Pageable pageable);
+    
     /**
      * Get the "id" fotografia.
      *

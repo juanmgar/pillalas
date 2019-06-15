@@ -23,23 +23,23 @@
             ]
         },
         {
+            "fieldName": "descripcion",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
             "fieldName": "foto",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "image"
-        },
-        {
-            "fieldName": "descripcion",
-            "fieldType": "String"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "fotografia",
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
             "otherEntityRelationshipName": "observatorio",
-            "relationshipName": "observatorio",
-            "otherEntityField": "id",
-            "ownerSide": true
+            "relationshipName": "autor",
+            "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-many",

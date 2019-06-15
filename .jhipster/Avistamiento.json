@@ -31,17 +31,17 @@
         },
         {
             "fieldName": "descripcion",
-            "fieldType": "String"
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "fotografia",
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
             "otherEntityRelationshipName": "avistamiento",
-            "relationshipName": "foto",
-            "otherEntityField": "id",
-            "ownerSide": true
+            "relationshipName": "autor",
+            "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-many",

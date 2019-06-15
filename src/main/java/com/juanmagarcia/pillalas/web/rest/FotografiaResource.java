@@ -89,12 +89,18 @@ public class FotografiaResource {
      * {@code GET  /fotografias} : get all the fotografias.
      *
      * @param pageable the pagination information.
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of fotografias in body.
      */
     @GetMapping("/fotografias")
-    public ResponseEntity<List<Fotografia>> getAllFotografias(Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<List<Fotografia>> getAllFotografias(Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get a page of Fotografias");
-        Page<Fotografia> page = fotografiaService.findAll(pageable);
+        Page<Fotografia> page;
+        if (eagerload) {
+            page = fotografiaService.findAllWithEagerRelationships(pageable);
+        } else {
+            page = fotografiaService.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

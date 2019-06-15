@@ -8,18 +8,12 @@
     -->
     <changeSet id="20190615103454-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="observatorio_id"
-                                 baseTableName="observatorio_observatorio"
-                                 constraintName="fk_observatorio_observatorio_observatorio_id"
+        <addForeignKeyConstraint baseColumnNames="autor_id"
+                                 baseTableName="observatorio"
+                                 constraintName="fk_observatorio_autor_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="observatorio"/>
+                                 referencedTableName="jhi_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="observatorio_id"
-                                 baseTableName="observatorio_observatorio"
-                                 constraintName="fk_observatorio_observatorio_observatorio_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="fotografia"/>
-        
         <addForeignKeyConstraint baseColumnNames="observatorio_id"
                                  baseTableName="observatorio_ave"
                                  constraintName="fk_observatorio_ave_observatorio_id"

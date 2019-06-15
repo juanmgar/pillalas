@@ -17,6 +17,10 @@
                 <dd>
                     <span>{{observatorio.longitud}}</span>
                 </dd>
+                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.descripcion">Descripcion</span></dt>
+                <dd>
+                    <span>{{observatorio.descripcion}}</span>
+                </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.foto">Foto</span></dt>
                 <dd>
                     <div *ngIf="observatorio.foto">
@@ -26,15 +30,9 @@
                         {{observatorio.fotoContentType}}, {{byteSize(observatorio.foto)}}
                     </div>
                 </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.descripcion">Descripcion</span></dt>
+                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.autor">Autor</span></dt>
                 <dd>
-                    <span>{{observatorio.descripcion}}</span>
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.observatorio">Observatorio</span></dt>
-                <dd>
-                    <span *ngFor="let observatorio of observatorio.observatorios; let last = last">
-                        <a [routerLink]="['/fotografia', observatorio?.id, 'view' ]">{{observatorio.id}}</a>{{last ? '' : ', '}}
-                    </span>
+                    {{observatorio.autor?.id}}
                 </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.ave">Ave</span></dt>
                 <dd>

@@ -25,11 +25,9 @@
                 <dd>
                     <span>{{avistamiento.descripcion}}</span>
                 </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.foto">Foto</span></dt>
+                <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.autor">Autor</span></dt>
                 <dd>
-                    <span *ngFor="let foto of avistamiento.fotos; let last = last">
-                        <a [routerLink]="['/fotografia', foto?.id, 'view' ]">{{foto.id}}</a>{{last ? '' : ', '}}
-                    </span>
+                    {{avistamiento.autor?.id}}
                 </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.ave">Ave</span></dt>
                 <dd>

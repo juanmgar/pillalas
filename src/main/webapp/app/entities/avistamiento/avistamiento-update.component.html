@@ -4,7 +4,7 @@
             <h2 id="jhi-avistamiento-heading" jhiTranslate="pillalasAlVueloApp.avistamiento.home.createOrEditLabel">Create or edit a Avistamiento</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!editForm.get('id').value">
+                <div class="form-group" [hidden]="!avistamiento.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
@@ -60,14 +60,15 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.avistamiento.descripcion" for="field_descripcion">Descripcion</label>
-                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
-                           formControlName="descripcion"/>
+                    <textarea class="form-control" name="descripcion" id="field_descripcion"
+                              formControlName="descripcion"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label jhiTranslate="pillalasAlVueloApp.avistamiento.foto" for="field_fotos">Foto</label>
-                    <select class="form-control" id="field_fotos" multiple name="fotos" formControlName="fotos">
-                        <option [ngValue]="getSelected(editForm.get('fotos').value, fotografiaOption)" *ngFor="let fotografiaOption of fotografias; trackBy: trackFotografiaById">{{fotografiaOption.id}}</option>
+                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.avistamiento.autor" for="field_autor">Autor</label>
+                    <select class="form-control" id="field_autor" name="autor" formControlName="autor">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('autor').value?.id ? editForm.get('autor').value : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
                     </select>
                 </div>
                 <div class="form-group">

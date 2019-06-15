@@ -7,6 +7,9 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IAve, Ave } from 'app/shared/model/ave.model';
 import { AveService } from './ave.service';
+import { IUser, UserService } from 'app/core';
+import { IFotografia } from 'app/shared/model/fotografia.model';
+import { FotografiaService } from 'app/entities/fotografia';
 import { IObservatorio } from 'app/shared/model/observatorio.model';
 import { ObservatorioService } from 'app/entities/observatorio';
 import { IAvistamiento } from 'app/shared/model/avistamiento.model';
@@ -17,7 +20,12 @@ import { AvistamientoService } from 'app/entities/avistamiento';
   templateUrl: './ave-update.component.html'
 })
 export class AveUpdateComponent implements OnInit {
+  ave: IAve;
   isSaving: boolean;
+
+  users: IUser[];
+
+  fotografias: IFotografia[];
 
   observatorios: IObservatorio[];
 
@@ -31,13 +39,16 @@ export class AveUpdateComponent implements OnInit {
     foto: [],
     fotoContentType: [],
     sonido: [],
-    sonidoContentType: []
+    sonidoContentType: [],
+    autor: []
   });
 
   constructor(
     protected dataUtils: JhiDataUtils,
     protected jhiAlertService: JhiAlertService,
     protected aveService: AveService,
+    protected userService: UserService,
+    protected fotografiaService: FotografiaService,
     protected observatorioService: ObservatorioService,
     protected avistamientoService: AvistamientoService,
     protected elementRef: ElementRef,
@@ -49,7 +60,22 @@ export class AveUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ ave }) => {
       this.updateForm(ave);
+      this.ave = ave;
     });
+    this.userService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IUser[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IUser[]>) => response.body)
+      )
+      .subscribe((res: IUser[]) => (this.users = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.fotografiaService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IFotografia[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IFotografia[]>) => response.body)
+      )
+      .subscribe((res: IFotografia[]) => (this.fotografias = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.observatorioService
       .query()
       .pipe(
@@ -75,7 +101,8 @@ export class AveUpdateComponent implements OnInit {
       foto: ave.foto,
       fotoContentType: ave.fotoContentType,
       sonido: ave.sonido,
-      sonidoContentType: ave.sonidoContentType
+      sonidoContentType: ave.sonidoContentType,
+      autor: ave.autor
     });
   }
 
@@ -145,7 +172,8 @@ export class AveUpdateComponent implements OnInit {
       fotoContentType: this.editForm.get(['fotoContentType']).value,
       foto: this.editForm.get(['foto']).value,
       sonidoContentType: this.editForm.get(['sonidoContentType']).value,
-      sonido: this.editForm.get(['sonido']).value
+      sonido: this.editForm.get(['sonido']).value,
+      autor: this.editForm.get(['autor']).value
     };
     return entity;
   }
@@ -164,6 +192,14 @@ export class AveUpdateComponent implements OnInit {
   }
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackUserById(index: number, item: IUser) {
+    return item.id;
+  }
+
+  trackFotografiaById(index: number, item: IFotografia) {
+    return item.id;
   }
 
   trackObservatorioById(index: number, item: IObservatorio) {

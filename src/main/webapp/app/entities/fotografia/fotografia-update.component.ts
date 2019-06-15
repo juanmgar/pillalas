@@ -7,41 +7,49 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IFotografia, Fotografia } from 'app/shared/model/fotografia.model';
 import { FotografiaService } from './fotografia.service';
-import { IAve } from 'app/shared/model/ave.model';
-import { AveService } from 'app/entities/ave';
 import { IAvistamiento } from 'app/shared/model/avistamiento.model';
 import { AvistamientoService } from 'app/entities/avistamiento';
 import { IObservatorio } from 'app/shared/model/observatorio.model';
 import { ObservatorioService } from 'app/entities/observatorio';
+import { IUser, UserService } from 'app/core';
+import { IAve } from 'app/shared/model/ave.model';
+import { AveService } from 'app/entities/ave';
 
 @Component({
   selector: 'jhi-fotografia-update',
   templateUrl: './fotografia-update.component.html'
 })
 export class FotografiaUpdateComponent implements OnInit {
+  fotografia: IFotografia;
   isSaving: boolean;
-
-  aves: IAve[];
 
   avistamientos: IAvistamiento[];
 
   observatorios: IObservatorio[];
+
+  users: IUser[];
+
+  aves: IAve[];
 
   editForm = this.fb.group({
     id: [],
     nombre: [],
     fichero: [],
     ficheroContentType: [],
-    ave: []
+    avistamiento: [],
+    observatorio: [],
+    autor: [],
+    aves: []
   });
 
   constructor(
     protected dataUtils: JhiDataUtils,
     protected jhiAlertService: JhiAlertService,
     protected fotografiaService: FotografiaService,
-    protected aveService: AveService,
     protected avistamientoService: AvistamientoService,
     protected observatorioService: ObservatorioService,
+    protected userService: UserService,
+    protected aveService: AveService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -51,14 +59,8 @@ export class FotografiaUpdateComponent implements OnInit {
     this.isSaving = false;
     this.activatedRoute.data.subscribe(({ fotografia }) => {
       this.updateForm(fotografia);
+      this.fotografia = fotografia;
     });
-    this.aveService
-      .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<IAve[]>) => mayBeOk.ok),
-        map((response: HttpResponse<IAve[]>) => response.body)
-      )
-      .subscribe((res: IAve[]) => (this.aves = res), (res: HttpErrorResponse) => this.onError(res.message));
     this.avistamientoService
       .query()
       .pipe(
@@ -73,6 +75,20 @@ export class FotografiaUpdateComponent implements OnInit {
         map((response: HttpResponse<IObservatorio[]>) => response.body)
       )
       .subscribe((res: IObservatorio[]) => (this.observatorios = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.userService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IUser[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IUser[]>) => response.body)
+      )
+      .subscribe((res: IUser[]) => (this.users = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.aveService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IAve[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IAve[]>) => response.body)
+      )
+      .subscribe((res: IAve[]) => (this.aves = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(fotografia: IFotografia) {
@@ -81,7 +97,10 @@ export class FotografiaUpdateComponent implements OnInit {
       nombre: fotografia.nombre,
       fichero: fotografia.fichero,
       ficheroContentType: fotografia.ficheroContentType,
-      ave: fotografia.ave
+      avistamiento: fotografia.avistamiento,
+      observatorio: fotografia.observatorio,
+      autor: fotografia.autor,
+      aves: fotografia.aves
     });
   }
 
@@ -148,7 +167,10 @@ export class FotografiaUpdateComponent implements OnInit {
       nombre: this.editForm.get(['nombre']).value,
       ficheroContentType: this.editForm.get(['ficheroContentType']).value,
       fichero: this.editForm.get(['fichero']).value,
-      ave: this.editForm.get(['ave']).value
+      avistamiento: this.editForm.get(['avistamiento']).value,
+      observatorio: this.editForm.get(['observatorio']).value,
+      autor: this.editForm.get(['autor']).value,
+      aves: this.editForm.get(['aves']).value
     };
     return entity;
   }
@@ -169,15 +191,19 @@ export class FotografiaUpdateComponent implements OnInit {
     this.jhiAlertService.error(errorMessage, null, null);
   }
 
-  trackAveById(index: number, item: IAve) {
-    return item.id;
-  }
-
   trackAvistamientoById(index: number, item: IAvistamiento) {
     return item.id;
   }
 
   trackObservatorioById(index: number, item: IObservatorio) {
+    return item.id;
+  }
+
+  trackUserById(index: number, item: IUser) {
+    return item.id;
+  }
+
+  trackAveById(index: number, item: IAve) {
     return item.id;
   }
 

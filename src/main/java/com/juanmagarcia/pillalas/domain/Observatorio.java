@@ -1,4 +1,7 @@
 package com.juanmagarcia.pillalas.domain;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,6 +11,7 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A Observatorio.
@@ -36,21 +40,19 @@ public class Observatorio implements Serializable {
     private String longitud;
 
     @Lob
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Lob
     @Column(name = "foto")
     private byte[] foto;
 
     @Column(name = "foto_content_type")
     private String fotoContentType;
 
-    @Column(name = "descripcion")
-    private String descripcion;
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "observatorio_observatorio",
-               joinColumns = @JoinColumn(name = "observatorio_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "observatorio_id", referencedColumnName = "id"))
-    private Set<Fotografia> observatorios = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("observatorios")
+    private User autor;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -107,6 +109,19 @@ public class Observatorio implements Serializable {
         this.longitud = longitud;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public Observatorio descripcion(String descripcion) {
+        this.descripcion = descripcion;
+        return this;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public byte[] getFoto() {
         return foto;
     }
@@ -133,42 +148,17 @@ public class Observatorio implements Serializable {
         this.fotoContentType = fotoContentType;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public User getAutor() {
+        return autor;
     }
 
-    public Observatorio descripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public Observatorio autor(User user) {
+        this.autor = user;
         return this;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Set<Fotografia> getObservatorios() {
-        return observatorios;
-    }
-
-    public Observatorio observatorios(Set<Fotografia> fotografias) {
-        this.observatorios = fotografias;
-        return this;
-    }
-
-    public Observatorio addObservatorio(Fotografia fotografia) {
-        this.observatorios.add(fotografia);
-        fotografia.getObservatorios().add(this);
-        return this;
-    }
-
-    public Observatorio removeObservatorio(Fotografia fotografia) {
-        this.observatorios.remove(fotografia);
-        fotografia.getObservatorios().remove(this);
-        return this;
-    }
-
-    public void setObservatorios(Set<Fotografia> fotografias) {
-        this.observatorios = fotografias;
+    public void setAutor(User user) {
+        this.autor = user;
     }
 
     public Set<Ave> getAves() {
@@ -220,9 +210,9 @@ public class Observatorio implements Serializable {
             ", nombre='" + getNombre() + "'" +
             ", latitud='" + getLatitud() + "'" +
             ", longitud='" + getLongitud() + "'" +
+            ", descripcion='" + getDescripcion() + "'" +
             ", foto='" + getFoto() + "'" +
             ", fotoContentType='" + getFotoContentType() + "'" +
-            ", descripcion='" + getDescripcion() + "'" +
             "}";
     }
 }

@@ -1,5 +1,6 @@
 package com.juanmagarcia.pillalas.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A Fotografia.
@@ -35,18 +37,23 @@ public class Fotografia implements Serializable {
     private String ficheroContentType;
 
     @ManyToOne
-    @JsonIgnoreProperties("fotos")
-    private Ave ave;
+    @JsonIgnoreProperties("fotografias")
+    private Avistamiento avistamiento;
 
-    @ManyToMany(mappedBy = "fotos")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
-    private Set<Avistamiento> avistamientos = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("fotografias")
+    private Observatorio observatorio;
 
-    @ManyToMany(mappedBy = "observatorios")
+    @ManyToOne
+    @JsonIgnoreProperties("fotografias")
+    private User autor;
+
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
-    private Set<Observatorio> observatorios = new HashSet<>();
+    @JoinTable(name = "fotografia_ave",
+               joinColumns = @JoinColumn(name = "fotografia_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "ave_id", referencedColumnName = "id"))
+    private Set<Ave> aves = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -96,67 +103,68 @@ public class Fotografia implements Serializable {
         this.ficheroContentType = ficheroContentType;
     }
 
-    public Ave getAve() {
-        return ave;
+    public Avistamiento getAvistamiento() {
+        return avistamiento;
     }
 
-    public Fotografia ave(Ave ave) {
-        this.ave = ave;
+    public Fotografia avistamiento(Avistamiento avistamiento) {
+        this.avistamiento = avistamiento;
         return this;
     }
 
-    public void setAve(Ave ave) {
-        this.ave = ave;
+    public void setAvistamiento(Avistamiento avistamiento) {
+        this.avistamiento = avistamiento;
     }
 
-    public Set<Avistamiento> getAvistamientos() {
-        return avistamientos;
+    public Observatorio getObservatorio() {
+        return observatorio;
     }
 
-    public Fotografia avistamientos(Set<Avistamiento> avistamientos) {
-        this.avistamientos = avistamientos;
+    public Fotografia observatorio(Observatorio observatorio) {
+        this.observatorio = observatorio;
         return this;
     }
 
-    public Fotografia addAvistamiento(Avistamiento avistamiento) {
-        this.avistamientos.add(avistamiento);
-        avistamiento.getFotos().add(this);
+    public void setObservatorio(Observatorio observatorio) {
+        this.observatorio = observatorio;
+    }
+
+    public User getAutor() {
+        return autor;
+    }
+
+    public Fotografia autor(User user) {
+        this.autor = user;
         return this;
     }
 
-    public Fotografia removeAvistamiento(Avistamiento avistamiento) {
-        this.avistamientos.remove(avistamiento);
-        avistamiento.getFotos().remove(this);
+    public void setAutor(User user) {
+        this.autor = user;
+    }
+
+    public Set<Ave> getAves() {
+        return aves;
+    }
+
+    public Fotografia aves(Set<Ave> aves) {
+        this.aves = aves;
         return this;
     }
 
-    public void setAvistamientos(Set<Avistamiento> avistamientos) {
-        this.avistamientos = avistamientos;
-    }
-
-    public Set<Observatorio> getObservatorios() {
-        return observatorios;
-    }
-
-    public Fotografia observatorios(Set<Observatorio> observatorios) {
-        this.observatorios = observatorios;
+    public Fotografia addAve(Ave ave) {
+        this.aves.add(ave);
+        ave.getFotos().add(this);
         return this;
     }
 
-    public Fotografia addObservatorio(Observatorio observatorio) {
-        this.observatorios.add(observatorio);
-        observatorio.getObservatorios().add(this);
+    public Fotografia removeAve(Ave ave) {
+        this.aves.remove(ave);
+        ave.getFotos().remove(this);
         return this;
     }
 
-    public Fotografia removeObservatorio(Observatorio observatorio) {
-        this.observatorios.remove(observatorio);
-        observatorio.getObservatorios().remove(this);
-        return this;
-    }
-
-    public void setObservatorios(Set<Observatorio> observatorios) {
-        this.observatorios = observatorios;
+    public void setAves(Set<Ave> aves) {
+        this.aves = aves;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

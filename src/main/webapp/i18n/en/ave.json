@@ -4,8 +4,7 @@
       "home": {
         "title": "Aves",
         "createLabel": "Create a new Ave",
-        "createOrEditLabel": "Create or edit a Ave",
-        "notFound": "No Ave found"
+        "createOrEditLabel": "Create or edit a Ave"
       },
       "created": "A new Ave is created with identifier {{ param }}",
       "updated": "A Ave is updated with identifier {{ param }}",
@@ -21,6 +20,7 @@
       "descripcion": "Descripcion",
       "foto": "Foto",
       "sonido": "Sonido",
+      "autor": "Autor",
       "foto": "Foto",
       "observatorio": "Observatorio",
       "avistamiento": "Avistamiento"

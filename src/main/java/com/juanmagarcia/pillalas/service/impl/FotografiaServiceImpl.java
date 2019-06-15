@@ -53,6 +53,15 @@ public class FotografiaServiceImpl implements FotografiaService {
         return fotografiaRepository.findAll(pageable);
     }
 
+    /**
+     * Get all the fotografias with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page<Fotografia> findAllWithEagerRelationships(Pageable pageable) {
+        return fotografiaRepository.findAllWithEagerRelationships(pageable);
+    }
+    
 
     /**
      * Get one fotografia by id.
@@ -64,7 +73,7 @@ public class FotografiaServiceImpl implements FotografiaService {
     @Transactional(readOnly = true)
     public Optional<Fotografia> findOne(Long id) {
         log.debug("Request to get Fotografia : {}", id);
-        return fotografiaRepository.findById(id);
+        return fotografiaRepository.findOneWithEagerRelationships(id);
     }
 
     /**

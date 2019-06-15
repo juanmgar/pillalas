@@ -1,4 +1,4 @@
-import { IFotografia } from 'app/shared/model/fotografia.model';
+import { IUser } from 'app/core/user/user.model';
 import { IAve } from 'app/shared/model/ave.model';
 
 export interface IObservatorio {
@@ -6,10 +6,10 @@ export interface IObservatorio {
   nombre?: string;
   latitud?: string;
   longitud?: string;
+  descripcion?: any;
   fotoContentType?: string;
   foto?: any;
-  descripcion?: string;
-  observatorios?: IFotografia[];
+  autor?: IUser;
   aves?: IAve[];
 }
 
@@ -19,10 +19,10 @@ export class Observatorio implements IObservatorio {
     public nombre?: string,
     public latitud?: string,
     public longitud?: string,
+    public descripcion?: any,
     public fotoContentType?: string,
     public foto?: any,
-    public descripcion?: string,
-    public observatorios?: IFotografia[],
+    public autor?: IUser,
     public aves?: IAve[]
   ) {}
 }

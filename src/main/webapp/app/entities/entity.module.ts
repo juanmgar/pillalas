@@ -19,6 +19,86 @@ import { RouterModule } from '@angular/router';
       {
         path: 'fotografia',
         loadChildren: './fotografia/fotografia.module#PillalasAlVueloFotografiaModule'
+      },
+      {
+        path: 'observatorio',
+        loadChildren: './observatorio/observatorio.module#PillalasAlVueloObservatorioModule'
+      },
+      {
+        path: 'ave',
+        loadChildren: './ave/ave.module#PillalasAlVueloAveModule'
+      },
+      {
+        path: 'avistamiento',
+        loadChildren: './avistamiento/avistamiento.module#PillalasAlVueloAvistamientoModule'
+      },
+      {
+        path: 'fotografia',
+        loadChildren: './fotografia/fotografia.module#PillalasAlVueloFotografiaModule'
+      },
+      {
+        path: 'observatorio',
+        loadChildren: './observatorio/observatorio.module#PillalasAlVueloObservatorioModule'
+      },
+      {
+        path: 'ave',
+        loadChildren: './ave/ave.module#PillalasAlVueloAveModule'
+      },
+      {
+        path: 'avistamiento',
+        loadChildren: './avistamiento/avistamiento.module#PillalasAlVueloAvistamientoModule'
+      },
+      {
+        path: 'fotografia',
+        loadChildren: './fotografia/fotografia.module#PillalasAlVueloFotografiaModule'
+      },
+      {
+        path: 'observatorio',
+        loadChildren: './observatorio/observatorio.module#PillalasAlVueloObservatorioModule'
+      },
+      {
+        path: 'ave',
+        loadChildren: './ave/ave.module#PillalasAlVueloAveModule'
+      },
+      {
+        path: 'avistamiento',
+        loadChildren: './avistamiento/avistamiento.module#PillalasAlVueloAvistamientoModule'
+      },
+      {
+        path: 'fotografia',
+        loadChildren: './fotografia/fotografia.module#PillalasAlVueloFotografiaModule'
+      },
+      {
+        path: 'observatorio',
+        loadChildren: './observatorio/observatorio.module#PillalasAlVueloObservatorioModule'
+      },
+      {
+        path: 'ave',
+        loadChildren: './ave/ave.module#PillalasAlVueloAveModule'
+      },
+      {
+        path: 'avistamiento',
+        loadChildren: './avistamiento/avistamiento.module#PillalasAlVueloAvistamientoModule'
+      },
+      {
+        path: 'fotografia',
+        loadChildren: './fotografia/fotografia.module#PillalasAlVueloFotografiaModule'
+      },
+      {
+        path: 'observatorio',
+        loadChildren: './observatorio/observatorio.module#PillalasAlVueloObservatorioModule'
+      },
+      {
+        path: 'ave',
+        loadChildren: './ave/ave.module#PillalasAlVueloAveModule'
+      },
+      {
+        path: 'avistamiento',
+        loadChildren: './avistamiento/avistamiento.module#PillalasAlVueloAvistamientoModule'
+      },
+      {
+        path: 'fotografia',
+        loadChildren: './fotografia/fotografia.module#PillalasAlVueloFotografiaModule'
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

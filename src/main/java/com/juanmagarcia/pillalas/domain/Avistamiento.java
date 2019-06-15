@@ -1,4 +1,7 @@
 package com.juanmagarcia.pillalas.domain;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -9,6 +12,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A Avistamiento.
@@ -40,15 +44,13 @@ public class Avistamiento implements Serializable {
     @Column(name = "longitud", nullable = false)
     private String longitud;
 
+    @Lob
     @Column(name = "descripcion")
     private String descripcion;
 
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "avistamiento_foto",
-               joinColumns = @JoinColumn(name = "avistamiento_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "foto_id", referencedColumnName = "id"))
-    private Set<Fotografia> fotos = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("avistamientos")
+    private User autor;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -131,29 +133,17 @@ public class Avistamiento implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Set<Fotografia> getFotos() {
-        return fotos;
+    public User getAutor() {
+        return autor;
     }
 
-    public Avistamiento fotos(Set<Fotografia> fotografias) {
-        this.fotos = fotografias;
+    public Avistamiento autor(User user) {
+        this.autor = user;
         return this;
     }
 
-    public Avistamiento addFoto(Fotografia fotografia) {
-        this.fotos.add(fotografia);
-        fotografia.getAvistamientos().add(this);
-        return this;
-    }
-
-    public Avistamiento removeFoto(Fotografia fotografia) {
-        this.fotos.remove(fotografia);
-        fotografia.getAvistamientos().remove(this);
-        return this;
-    }
-
-    public void setFotos(Set<Fotografia> fotografias) {
-        this.fotos = fotografias;
+    public void setAutor(User user) {
+        this.autor = user;
     }
 
     public Set<Ave> getAves() {

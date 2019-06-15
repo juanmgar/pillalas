@@ -49,13 +49,13 @@ public class ObservatorioResourceIT {
     private static final String DEFAULT_LONGITUD = "AAAAAAAAAA";
     private static final String UPDATED_LONGITUD = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DESCRIPCION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPCION = "BBBBBBBBBB";
+
     private static final byte[] DEFAULT_FOTO = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_FOTO = TestUtil.createByteArray(1, "1");
     private static final String DEFAULT_FOTO_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_FOTO_CONTENT_TYPE = "image/png";
-
-    private static final String DEFAULT_DESCRIPCION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPCION = "BBBBBBBBBB";
 
     @Autowired
     private ObservatorioRepository observatorioRepository;
@@ -111,9 +111,9 @@ public class ObservatorioResourceIT {
             .nombre(DEFAULT_NOMBRE)
             .latitud(DEFAULT_LATITUD)
             .longitud(DEFAULT_LONGITUD)
+            .descripcion(DEFAULT_DESCRIPCION)
             .foto(DEFAULT_FOTO)
-            .fotoContentType(DEFAULT_FOTO_CONTENT_TYPE)
-            .descripcion(DEFAULT_DESCRIPCION);
+            .fotoContentType(DEFAULT_FOTO_CONTENT_TYPE);
         return observatorio;
     }
     /**
@@ -127,9 +127,9 @@ public class ObservatorioResourceIT {
             .nombre(UPDATED_NOMBRE)
             .latitud(UPDATED_LATITUD)
             .longitud(UPDATED_LONGITUD)
+            .descripcion(UPDATED_DESCRIPCION)
             .foto(UPDATED_FOTO)
-            .fotoContentType(UPDATED_FOTO_CONTENT_TYPE)
-            .descripcion(UPDATED_DESCRIPCION);
+            .fotoContentType(UPDATED_FOTO_CONTENT_TYPE);
         return observatorio;
     }
 
@@ -156,9 +156,9 @@ public class ObservatorioResourceIT {
         assertThat(testObservatorio.getNombre()).isEqualTo(DEFAULT_NOMBRE);
         assertThat(testObservatorio.getLatitud()).isEqualTo(DEFAULT_LATITUD);
         assertThat(testObservatorio.getLongitud()).isEqualTo(DEFAULT_LONGITUD);
+        assertThat(testObservatorio.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
         assertThat(testObservatorio.getFoto()).isEqualTo(DEFAULT_FOTO);
         assertThat(testObservatorio.getFotoContentType()).isEqualTo(DEFAULT_FOTO_CONTENT_TYPE);
-        assertThat(testObservatorio.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
     }
 
     @Test
@@ -249,9 +249,9 @@ public class ObservatorioResourceIT {
             .andExpect(jsonPath("$.[*].nombre").value(hasItem(DEFAULT_NOMBRE.toString())))
             .andExpect(jsonPath("$.[*].latitud").value(hasItem(DEFAULT_LATITUD.toString())))
             .andExpect(jsonPath("$.[*].longitud").value(hasItem(DEFAULT_LONGITUD.toString())))
+            .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION.toString())))
             .andExpect(jsonPath("$.[*].fotoContentType").value(hasItem(DEFAULT_FOTO_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].foto").value(hasItem(Base64Utils.encodeToString(DEFAULT_FOTO))))
-            .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION.toString())));
+            .andExpect(jsonPath("$.[*].foto").value(hasItem(Base64Utils.encodeToString(DEFAULT_FOTO))));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -301,9 +301,9 @@ public class ObservatorioResourceIT {
             .andExpect(jsonPath("$.nombre").value(DEFAULT_NOMBRE.toString()))
             .andExpect(jsonPath("$.latitud").value(DEFAULT_LATITUD.toString()))
             .andExpect(jsonPath("$.longitud").value(DEFAULT_LONGITUD.toString()))
+            .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION.toString()))
             .andExpect(jsonPath("$.fotoContentType").value(DEFAULT_FOTO_CONTENT_TYPE))
-            .andExpect(jsonPath("$.foto").value(Base64Utils.encodeToString(DEFAULT_FOTO)))
-            .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION.toString()));
+            .andExpect(jsonPath("$.foto").value(Base64Utils.encodeToString(DEFAULT_FOTO)));
     }
 
     @Test
@@ -330,9 +330,9 @@ public class ObservatorioResourceIT {
             .nombre(UPDATED_NOMBRE)
             .latitud(UPDATED_LATITUD)
             .longitud(UPDATED_LONGITUD)
+            .descripcion(UPDATED_DESCRIPCION)
             .foto(UPDATED_FOTO)
-            .fotoContentType(UPDATED_FOTO_CONTENT_TYPE)
-            .descripcion(UPDATED_DESCRIPCION);
+            .fotoContentType(UPDATED_FOTO_CONTENT_TYPE);
 
         restObservatorioMockMvc.perform(put("/api/observatorios")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -346,9 +346,9 @@ public class ObservatorioResourceIT {
         assertThat(testObservatorio.getNombre()).isEqualTo(UPDATED_NOMBRE);
         assertThat(testObservatorio.getLatitud()).isEqualTo(UPDATED_LATITUD);
         assertThat(testObservatorio.getLongitud()).isEqualTo(UPDATED_LONGITUD);
+        assertThat(testObservatorio.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testObservatorio.getFoto()).isEqualTo(UPDATED_FOTO);
         assertThat(testObservatorio.getFotoContentType()).isEqualTo(UPDATED_FOTO_CONTENT_TYPE);
-        assertThat(testObservatorio.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
     }
 
     @Test
