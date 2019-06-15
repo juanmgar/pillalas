@@ -1,0 +1,190 @@
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import { IObservatorio, Observatorio } from 'app/shared/model/observatorio.model';
+import { ObservatorioService } from './observatorio.service';
+import { IFotografia } from 'app/shared/model/fotografia.model';
+import { FotografiaService } from 'app/entities/fotografia';
+import { IAve } from 'app/shared/model/ave.model';
+import { AveService } from 'app/entities/ave';
+
+@Component({
+  selector: 'jhi-observatorio-update',
+  templateUrl: './observatorio-update.component.html'
+})
+export class ObservatorioUpdateComponent implements OnInit {
+  isSaving: boolean;
+
+  fotografias: IFotografia[];
+
+  aves: IAve[];
+
+  editForm = this.fb.group({
+    id: [],
+    nombre: [null, [Validators.required]],
+    latitud: [null, [Validators.required]],
+    longitud: [null, [Validators.required]],
+    foto: [],
+    fotoContentType: [],
+    descripcion: [],
+    observatorios: [],
+    aves: []
+  });
+
+  constructor(
+    protected dataUtils: JhiDataUtils,
+    protected jhiAlertService: JhiAlertService,
+    protected observatorioService: ObservatorioService,
+    protected fotografiaService: FotografiaService,
+    protected aveService: AveService,
+    protected elementRef: ElementRef,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit() {
+    this.isSaving = false;
+    this.activatedRoute.data.subscribe(({ observatorio }) => {
+      this.updateForm(observatorio);
+    });
+    this.fotografiaService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IFotografia[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IFotografia[]>) => response.body)
+      )
+      .subscribe((res: IFotografia[]) => (this.fotografias = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.aveService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IAve[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IAve[]>) => response.body)
+      )
+      .subscribe((res: IAve[]) => (this.aves = res), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  updateForm(observatorio: IObservatorio) {
+    this.editForm.patchValue({
+      id: observatorio.id,
+      nombre: observatorio.nombre,
+      latitud: observatorio.latitud,
+      longitud: observatorio.longitud,
+      foto: observatorio.foto,
+      fotoContentType: observatorio.fotoContentType,
+      descripcion: observatorio.descripcion,
+      observatorios: observatorio.observatorios,
+      aves: observatorio.aves
+    });
+  }
+
+  byteSize(field) {
+    return this.dataUtils.byteSize(field);
+  }
+
+  openFile(contentType, field) {
+    return this.dataUtils.openFile(contentType, field);
+  }
+
+  setFileData(event, field: string, isImage) {
+    return new Promise((resolve, reject) => {
+      if (event && event.target && event.target.files && event.target.files[0]) {
+        const file = event.target.files[0];
+        if (isImage && !/^image\//.test(file.type)) {
+          reject(`File was expected to be an image but was found to be ${file.type}`);
+        } else {
+          const filedContentType: string = field + 'ContentType';
+          this.dataUtils.toBase64(file, base64Data => {
+            this.editForm.patchValue({
+              [field]: base64Data,
+              [filedContentType]: file.type
+            });
+          });
+        }
+      } else {
+        reject(`Base64 data was not set as file could not be extracted from passed parameter: ${event}`);
+      }
+    }).then(
+      () => console.log('blob added'), // sucess
+      this.onError
+    );
+  }
+
+  clearInputImage(field: string, fieldContentType: string, idInput: string) {
+    this.editForm.patchValue({
+      [field]: null,
+      [fieldContentType]: null
+    });
+    if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
+      this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
+    }
+  }
+
+  previousState() {
+    window.history.back();
+  }
+
+  save() {
+    this.isSaving = true;
+    const observatorio = this.createFromForm();
+    if (observatorio.id !== undefined) {
+      this.subscribeToSaveResponse(this.observatorioService.update(observatorio));
+    } else {
+      this.subscribeToSaveResponse(this.observatorioService.create(observatorio));
+    }
+  }
+
+  private createFromForm(): IObservatorio {
+    const entity = {
+      ...new Observatorio(),
+      id: this.editForm.get(['id']).value,
+      nombre: this.editForm.get(['nombre']).value,
+      latitud: this.editForm.get(['latitud']).value,
+      longitud: this.editForm.get(['longitud']).value,
+      fotoContentType: this.editForm.get(['fotoContentType']).value,
+      foto: this.editForm.get(['foto']).value,
+      descripcion: this.editForm.get(['descripcion']).value,
+      observatorios: this.editForm.get(['observatorios']).value,
+      aves: this.editForm.get(['aves']).value
+    };
+    return entity;
+  }
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IObservatorio>>) {
+    result.subscribe((res: HttpResponse<IObservatorio>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+  }
+
+  protected onSaveSuccess() {
+    this.isSaving = false;
+    this.previousState();
+  }
+
+  protected onSaveError() {
+    this.isSaving = false;
+  }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackFotografiaById(index: number, item: IFotografia) {
+    return item.id;
+  }
+
+  trackAveById(index: number, item: IAve) {
+    return item.id;
+  }
+
+  getSelected(selectedVals: Array<any>, option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
+  }
+}

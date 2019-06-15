@@ -43,6 +43,19 @@ public class CacheConfiguration {
             createCache(cm, com.juanmagarcia.pillalas.domain.User.class.getName());
             createCache(cm, com.juanmagarcia.pillalas.domain.Authority.class.getName());
             createCache(cm, com.juanmagarcia.pillalas.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Observatorio.class.getName());
+            createCache(cm, com.juanmagarcia.pillalas.domain.Observatorio.class.getName() + ".observatorios");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Observatorio.class.getName() + ".aves");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Ave.class.getName());
+            createCache(cm, com.juanmagarcia.pillalas.domain.Ave.class.getName() + ".fotos");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Ave.class.getName() + ".observatorios");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Ave.class.getName() + ".avistamientos");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Avistamiento.class.getName());
+            createCache(cm, com.juanmagarcia.pillalas.domain.Avistamiento.class.getName() + ".fotos");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Avistamiento.class.getName() + ".aves");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Fotografia.class.getName());
+            createCache(cm, com.juanmagarcia.pillalas.domain.Fotografia.class.getName() + ".avistamientos");
+            createCache(cm, com.juanmagarcia.pillalas.domain.Fotografia.class.getName() + ".observatorios");
             // jhipster-needle-ehcache-add-entry
         };
     }

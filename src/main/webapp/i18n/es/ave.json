@@ -1,0 +1,29 @@
+{
+  "pillalasAlVueloApp": {
+    "ave": {
+      "home": {
+        "title": "Aves",
+        "createLabel": "Crear nuevo Ave",
+        "createOrEditLabel": "Crear o editar Ave",
+        "notFound": "No Ave found"
+      },
+      "created": "Un nuevo Ave ha sido creado con el identificador {{ param }}",
+      "updated": "Un Ave ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Ave ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Ave {{ id }}?"
+      },
+      "detail": {
+        "title": "Ave"
+      },
+      "nombreComun": "Nombre Comun",
+      "nombreCientifico": "Nombre Cientifico",
+      "descripcion": "Descripcion",
+      "foto": "Foto",
+      "sonido": "Sonido",
+      "foto": "Foto",
+      "observatorio": "Observatorio",
+      "avistamiento": "Avistamiento"
+    }
+  }
+}
