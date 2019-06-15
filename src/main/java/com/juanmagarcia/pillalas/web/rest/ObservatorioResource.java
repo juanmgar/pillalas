@@ -23,11 +23,10 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
- * REST controller for managing {@link com.juanmagarcia.pillalas.domain.Observatorio}.
+ * REST controller for managing {@link com.juanmagarcia.pavdaw.domain.Observatorio}.
  */
 @RestController
 @RequestMapping("/api")
@@ -104,6 +103,32 @@ public class ObservatorioResource {
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+        /**
+     * {@code GET  /aves} : get all the aves.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of aves in body.
+     */
+    @GetMapping("/observatoriosfiltro/{text}")
+    public ResponseEntity<List<Observatorio>> getAllObservatoriosFiltro(@PathVariable String text, Pageable pageable) {
+        log.debug("REST request to get a page of Observatorios"+text);
+        Page<Observatorio> page = observatorioService.findAll(pageable);
+        List<Observatorio> observatorioList = page.getContent();
+        List<Observatorio> observatorioResult = new ArrayList<Observatorio>();
+
+        for ( int i=0; i<observatorioList.size();i++){
+            int intIndex = observatorioList.get(i).getNombre().indexOf(text);
+          if(intIndex == - 1){
+            System.out.println("palabra no encontrada");
+          }else{
+            observatorioResult.add(observatorioList.get(i));
+            System.out.println("palabra encontrada"
+             + intIndex);
+          }
+        }
+        return ResponseEntity.ok().body(observatorioResult);
     }
 
     /**

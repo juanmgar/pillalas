@@ -23,11 +23,10 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
- * REST controller for managing {@link com.juanmagarcia.pillalas.domain.Ave}.
+ * REST controller for managing {@link com.juanmagarcia.pavdaw.domain.Ave}.
  */
 @RestController
 @RequestMapping("/api")
@@ -98,6 +97,32 @@ public class AveResource {
         Page<Ave> page = aveService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /aves} : get all the aves.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of aves in body.
+     */
+    @GetMapping("/avesfiltro/{text}")
+    public ResponseEntity<List<Ave>> getAllAvesFiltro(@PathVariable String text, Pageable pageable) {
+        log.debug("REST request to get a page of Aves"+text);
+        Page<Ave> page = aveService.findAll(pageable);
+        List<Ave> aveList = page.getContent();
+        List<Ave> aveListResult = new ArrayList<Ave>();
+
+        for ( int i=0; i<aveList.size();i++){
+            int intIndex = aveList.get(i).getNombreComun().indexOf(text);
+          if(intIndex == - 1){
+            System.out.println("palabra no encontrada");
+          }else{
+            aveListResult.add(aveList.get(i));
+            System.out.println("palabra encontrada"
+             + intIndex);
+          }
+        }
+        return ResponseEntity.ok().body(aveListResult);
     }
 
     /**

@@ -32,6 +32,10 @@ export class ObservatorioService {
     return this.http.get<IObservatorio[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
+  findTextos(text?: any): Observable<EntityArrayResponseType> {
+    return this.http.get<IObservatorio[]>(`api/observatoriosfiltro/${text}`, { observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

@@ -7,41 +7,74 @@
             <h1 class="display-4" jhiTranslate="home.title">¡Bienvenido a píllalas al vuelo!</h1>
             <p class="lead" jhiTranslate="home.subtitle">La web para los amantes de las aves</p>
         </div>
+        <div class="buscador">
+            <input class="buscador" autocomplete="false" type="text" (keyup)="autocomplete()"
+                class="form-control col-12 mb-1" id="searchString" placeholder="Busca aves u observatorios..." autofocus
+                name="searchString" [(ngModel)]="searchString" />
+        </div>
     </div>
 </div>
-<div class="row justify-content-center">
-    <div class="col-md-9">
-        <div [ngSwitch]="isAuthenticated()">
-            <div class="alert alert-success" *ngSwitchCase="true">
-                <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
-                    [translateValues]="{username: account.login}"> You are logged in as user "{{account.login}}".
-                </span>
-            </div>
 
-            <div class="alert alert-warning" *ngSwitchCase="false">
-                <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
-                <a class="alert-link" routerLink="register" jhiTranslate="global.messages.info.register.link">Register a
-                    new account</a>
-            </div>
+<div class="justify-content-center m-3 p-2">
+    <div class="border align-content">
+        <div *ngIf="(results && results.length > 0) || resultsObs && resultsObs.length > 0">
+            <h3 class="text-center">Resultado de la búsqueda</h3>
+            <hr>
+            </br>
+            <span *ngFor="let resultsNext of results ;let i = index">
+                <a [routerLink]="['/ave', resultsNext.id, 'view' ]"><img
+                        [src]="'data:' + resultsNext.fotoContentType + ';base64,' + resultsNext.foto"
+                        class="img-thumbnail img-fluid col-2" alt="image" />
+                </a><button type="submit" [routerLink]="['/ave', resultsNext.id, 'view' ]" class="btn btn-info btn-sm">
+                    {{resultsNext.nombreComun}}
+                    <fa-icon [icon]="'eye'"></fa-icon>
+                </button>
+            </span>
+            <span *ngFor="let resultsNext of resultsObs ;let i = index">
+                <a [routerLink]="['/observatorio', resultsNext.id, 'view' ]"><img
+                        [src]="'data:' + resultsNext.fotoContentType + ';base64,' + resultsNext.foto"
+                        class="img-thumbnail img-fluid col-2" alt="image" />
+                </a><button type="submit" [routerLink]="['/observatorio', resultsNext.id, 'view' ]"
+                    class="btn btn-info btn-sm">
+                    {{resultsNext.nombre}}
+                    <fa-icon [icon]="'eye'"></fa-icon>
+                </button>
+            </span>
         </div>
-
-        <p jhiTranslate="home.question">
-            If you have any question on JHipster:
-        </p>
-
-        <ul>
-            <li><a routerLink="ave" jhiTranslate="home.link.aves">Listado de Aves</a></li>
-            <li><a routerLink="observatorio" jhiTranslate="home.link.observatorios">Listado de Observatorios</a></li>
-        </ul>
-
-        <p>
-            <span jhiTranslate="home.more">Además los usuarios registrados pueden...</span>
-        </p>
-
-        <ul>
-            <li><span jhiTranslate="home.link.avistamientos">Anotar todos tus avistamientos</span></li>
-            <li><span jhiTranslate="home.link.colaborar">Colaborar con la comunidad añadiendo nuevas especies,
-                    observatorios y fotografías</span></li>
-        </ul>
     </div>
+</div>
+
+<div [ngSwitch]="isAuthenticated()">
+    <div class="alert alert-success" *ngSwitchCase="true">
+        <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message"
+            [translateValues]="{username: account.login}"> You are logged in as user "{{account.login}}".
+        </span>
+    </div>
+
+    <div class="alert alert-warning" *ngSwitchCase="false">
+        <span jhiTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>&nbsp;
+        <a class="alert-link" routerLink="register" jhiTranslate="global.messages.info.register.link">Register a
+            new account</a>
+    </div>
+</div>
+
+<p jhiTranslate="home.question">
+    ¿Te gustan las aves...? En esta web podrás:
+</p>
+
+<ul>
+    <li><a routerLink="ave" jhiTranslate="home.link.aves">Listado de Aves</a></li>
+    <li><a routerLink="observatorio" jhiTranslate="home.link.observatorios">Listado de Observatorios</a></li>
+</ul>
+
+<p>
+    <span jhiTranslate="home.more">Además los usuarios registrados pueden...</span>
+</p>
+
+<ul>
+    <li><span jhiTranslate="home.link.avistamientos">Anotar todos tus avistamientos</span></li>
+    <li><span jhiTranslate="home.link.colaborar">Colaborar con la comunidad añadiendo nuevas especies,
+            observatorios y fotografías</span></li>
+</ul>
+</div>
 </div>

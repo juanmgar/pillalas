@@ -6,7 +6,7 @@
       "403": "Todavía no tienes permisos para realizar esta acción.",
       "404": "La página no existe.",
       "405": "El verbo HTTP utilizado no tiene soporte para este URL.",
-      "500": "Error interno del servidor."
+      "500": "Esta operación no está permitida porque este elemento forma parte de alguna ficha. \n Si desea borrarlo contacte con el administrador."
     },
     "messages": {
       "link": "Crea una cuenta",
