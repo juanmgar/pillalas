@@ -2,12 +2,31 @@
 Main page styles
 ========================================================================== */
 
-.hipster {
+.bird {
   display: inline-block;
   width: 347px;
   height: 497px;
-  background: url('../../content/images/jhipster_family_member_0.svg') no-repeat center top;
   background-size: contain;
+}
+
+.jumbotron {
+  position: relative;
+  overflow: hidden;
+  background-color: black;
+}
+.jumbotron video {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /*  object-fit is not supported on IE  */
+  object-fit: cover;
+  opacity: 0.5;
+}
+.jumbotron .container {
+  z-index: 2;
+  position: relative;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
@@ -17,7 +36,7 @@ Main page styles
   only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx) {
   .hipster {
-    background: url('../../content/images/jhipster_family_member_0.svg') no-repeat center top;
+    background: url('../../content/images/jhipster_family_member_3.svg') no-repeat center top;
     background-size: contain;
   }
 }
