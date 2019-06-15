@@ -3,10 +3,14 @@
     "title": "Error page!",
     "http": {
       "400": "Bad request.",
-      "403": "You are not authorized to access this page.",
+      "403": "You are not authorized yet to access this page.",
       "404": "The page does not exist.",
       "405": "The HTTP verb you used is not supported for this URL.",
       "500": "Internal server error."
+    },
+    "messages": {
+      "link": "Create a new account",
+      "noaccount": "Aren't you a registered user yet?"
     },
     "concurrencyFailure": "Another user modified this data at the same time as you. Your changes were rejected.",
     "validation": "Validation error on the server."

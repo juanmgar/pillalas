@@ -11,8 +11,8 @@ import { IAvistamiento } from 'app/shared/model/avistamiento.model';
 })
 export class AvistamientoDetailComponent implements OnInit {
   avistamiento: IAvistamiento;
-  latitude;
-  longitude;
+  latitude: Number;
+  longitude: Number;
   mapType = 'satellite';
 
   constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}

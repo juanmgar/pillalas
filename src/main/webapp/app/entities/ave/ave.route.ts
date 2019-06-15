@@ -37,7 +37,7 @@ export const aveRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
       defaultSort: 'id,asc',
       pageTitle: 'pillalasAlVueloApp.ave.home.title'
     },
@@ -50,7 +50,7 @@ export const aveRoute: Routes = [
       ave: AveResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
       pageTitle: 'pillalasAlVueloApp.ave.home.title'
     },
     canActivate: [UserRouteAccessService]

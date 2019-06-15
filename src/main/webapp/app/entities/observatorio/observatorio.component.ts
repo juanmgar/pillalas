@@ -80,6 +80,10 @@ export class ObservatorioComponent implements OnInit, OnDestroy {
     this.loadAll();
   }
 
+  isAuthenticated() {
+    return this.accountService.isAuthenticated();
+  }
+
   clear() {
     this.page = 0;
     this.router.navigate([

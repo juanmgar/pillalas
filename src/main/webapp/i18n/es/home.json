@@ -5,15 +5,15 @@
     "logged": {
       "message": "Está conectado como \"{{username}}\"."
     },
-    "question": "Si tiene preguntas sobre JHipster:",
+    "question": "¿Te gustan las aves...? En esta web podrás:",
     "link": {
-      "homepage": "Página de inicio de JHipster",
-      "stackoverflow": "JHipster en Stack Overflow",
+      "aves": "Consultar un listado con datos de distintas especies",
+      "observatorios": "Localizar los mejores lugares para ver aves en nuestra lista de observatorios",
       "bugtracker": "JHipster seguimiento de errores",
-      "chat": "Sala de chat pública de JHipster",
-      "follow": "contacto @java_hipster en Twitter"
+      "colaborar": "Colaborar con la comunidad añadiendo nuevas especies, observatorios y fotografías",
+      "help": "contacto @java_hipster en Twitter",
+      "avistamientos": "Anotar todos sus avistamientos"
     },
-    "like": "Si te gusta JHipster, danos una estrella en",
-    "github": "GitHub"
+    "more": "Además los usuarios registrados pueden..."
   }
 }

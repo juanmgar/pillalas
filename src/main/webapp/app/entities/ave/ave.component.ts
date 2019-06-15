@@ -80,6 +80,12 @@ export class AveComponent implements OnInit, OnDestroy {
     this.loadAll();
   }
 
+  isAuthenticated() {
+    let variable = this.accountService.isAuthenticated();
+    console.log(variable);
+    return this.accountService.isAuthenticated();
+  }
+
   clear() {
     this.page = 0;
     this.router.navigate([

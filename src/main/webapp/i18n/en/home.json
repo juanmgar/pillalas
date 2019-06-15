@@ -1,19 +1,19 @@
 {
   "home": {
-    "title": "Welcome, Píllalas al Vuelo!",
+    "title": "Welcome to Píllalas al Vuelo!",
     "subtitle": "The web for bird lovers",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
-    "question": "If you have any question on JHipster:",
+    "question": "¿Te gustan las aves...? En esta web podrás:",
     "link": {
-      "homepage": "JHipster homepage",
-      "stackoverflow": "JHipster on Stack Overflow",
-      "bugtracker": "JHipster bug tracker",
-      "chat": "JHipster public chat room",
-      "follow": "follow @java_hipster on Twitter"
+      "aves": "Consultar un listado con datos de distintas especies",
+      "observatorios": "Localizar los mejores lugares para ver aves en nuestra lista de observatorios",
+      "bugtracker": "JHipster seguimiento de errores",
+      "colaborar": "Colaborar con la comunidad añadiendo nuevas especies, observatorios y fotografías",
+      "help": "contacto @java_hipster en Twitter",
+      "avistamientos": "Anotar todos tus avistamientos"
     },
-    "like": "If you like JHipster, don't forget to give us a star on",
-    "github": "GitHub"
+    "more": "Además los usuarios registrados pueden..."
   }
 }

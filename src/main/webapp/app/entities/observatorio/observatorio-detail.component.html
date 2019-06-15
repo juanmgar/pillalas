@@ -1,14 +1,18 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-5">
+        <div *ngIf="observatorio.foto">
+            <a (click)="openFile(observatorio.fotoContentType, ave.foto)">
+                <img class="border border-secondary" [src]="'data:' + observatorio.fotoContentType + ';base64,' + observatorio.foto"
+                    style="max-width: 100%;" alt="observatorio image" />
+            </a>
+        </div>
+    </div>
+    <div class="col-7">
         <div *ngIf="observatorio">
-            <h2><span jhiTranslate="pillalasAlVueloApp.observatorio.detail.title">Observatorio</span> {{observatorio.id}}</h2>
+            <h2>{{observatorio.nombre}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.nombre">Nombre</span></dt>
-                <dd>
-                    <span>{{observatorio.nombre}}</span>
-                </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.latitud">Latitud</span></dt>
                 <dd>
                     <span>{{observatorio.latitud}}</span>
@@ -21,36 +25,26 @@
                 <dd>
                     <span>{{observatorio.descripcion}}</span>
                 </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.foto">Foto</span></dt>
-                <dd>
-                    <div *ngIf="observatorio.foto">
-                        <a (click)="openFile(observatorio.fotoContentType, observatorio.foto)">
-                            <img [src]="'data:' + observatorio.fotoContentType + ';base64,' + observatorio.foto" style="max-width: 100%;" alt="observatorio image"/>
-                        </a>
-                        {{observatorio.fotoContentType}}, {{byteSize(observatorio.foto)}}
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.autor">Autor</span></dt>
-                <dd>
-                    {{observatorio.autor?.id}}
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.ave">Ave</span></dt>
+                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.ave">Aves que puedes encontrar</span></dt>
                 <dd>
                     <span *ngFor="let ave of observatorio.aves; let last = last">
-                        <a [routerLink]="['/ave', ave?.id, 'view' ]">{{ave.id}}</a>{{last ? '' : ', '}}
+                        <a (click)="openFile(ave.fotoContentType, ave.foto)">
+                            <img [src]="'data:' + ave.fotoContentType + ';base64,' + ave.foto" class="img-thumbnail img-fluid col-2" alt="ave image" />
+                        </a>
+                        <a [routerLink]="['/ave', ave?.id, 'view' ]">{{ave.nombreComun}}</a>{{last ? '' : ''}}
                     </span>
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <agm-map [latitude]="latitude" [longitude]="longitude">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+            </agm-map>
+
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/observatorio', observatorio.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/observatorio', observatorio.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

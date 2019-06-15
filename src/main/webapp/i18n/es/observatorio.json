@@ -2,18 +2,18 @@
   "pillalasAlVueloApp": {
     "observatorio": {
       "home": {
-        "title": "Observatorios",
-        "createLabel": "Crear nuevo Observatorio",
-        "createOrEditLabel": "Crear o editar Observatorio"
+        "title": "Puestos de Observación",
+        "createLabel": "Crear ficha Puesto Obs.",
+        "createOrEditLabel": "Crear o editar Puesto Obs."
       },
-      "created": "Un nuevo Observatorio ha sido creado con el identificador {{ param }}",
-      "updated": "Un Observatorio ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Observatorio ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nuevo Puesto Obs. ha sido creado con el identificador {{ param }}",
+      "updated": "Un Puesto Obs ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Puesto Obs ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Observatorio {{ id }}?"
+        "question": "¿Seguro que quiere eliminar Puesto Obs {{ id }}?"
       },
       "detail": {
-        "title": "Observatorio"
+        "title": "Puesto de Observación"
       },
       "nombre": "Nombre",
       "latitud": "Latitud",
@@ -21,7 +21,7 @@
       "descripcion": "Descripcion",
       "foto": "Foto",
       "autor": "Autor",
-      "ave": "Ave"
+      "ave": "Aves que puedes ver"
     }
   }
 }

@@ -2,7 +2,7 @@
     <div class="col-5">
         <div *ngIf="ave.foto">
             <a (click)="openFile(ave.fotoContentType, ave.foto)">
-                <img [src]="'data:' + ave.fotoContentType + ';base64,' + ave.foto" style="max-width: 100%;"
+                <img class="border border-secondary" [src]="'data:' + ave.fotoContentType + ';base64,' + ave.foto" style="max-width: 100%;"
                     alt="ave image" />
             </a>
         </div>

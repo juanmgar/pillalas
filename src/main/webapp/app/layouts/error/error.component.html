@@ -10,9 +10,16 @@
                 <div class="alert alert-danger">{{errorMessage}}
                 </div>
             </div>
-            <div [hidden]="!error403" class="alert alert-danger" jhiTranslate="error.http.403">You are not authorized to access this page.
+            <div [hidden]="!error403" class="alert alert-danger" jhiTranslate="error.http.403">You are not authorized to
+                access this page.
+                <span [hidden]="!error403" jhiTranslate="error.http.messages.noaccount">You don't have an account
+                    yet?</span>&nbsp;
+                <a [hidden]="!error403" class="alert-link" routerLink="register"
+                    jhiTranslate="error.http.messages.link">Register a
+                    new account</a>
             </div>
-            <div [hidden]="!error404" class="alert alert-danger" jhiTranslate="error.http.404">The page asked was not found.
+            <div [hidden]="!error404" class="alert alert-danger" jhiTranslate="error.http.404">The page asked was not
+                found.
             </div>
         </div>
     </div>

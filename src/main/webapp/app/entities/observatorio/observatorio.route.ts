@@ -37,7 +37,7 @@ export const observatorioRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
       defaultSort: 'id,asc',
       pageTitle: 'pillalasAlVueloApp.observatorio.home.title'
     },
@@ -50,7 +50,7 @@ export const observatorioRoute: Routes = [
       observatorio: ObservatorioResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [],
       pageTitle: 'pillalasAlVueloApp.observatorio.home.title'
     },
     canActivate: [UserRouteAccessService]

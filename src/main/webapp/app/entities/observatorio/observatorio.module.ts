@@ -13,11 +13,18 @@ import {
   observatorioRoute,
   observatorioPopupRoute
 } from './';
+import { AgmCoreModule } from '@agm/core';
 
 const ENTITY_STATES = [...observatorioRoute, ...observatorioPopupRoute];
 
 @NgModule({
-  imports: [PillalasAlVueloSharedModule, RouterModule.forChild(ENTITY_STATES)],
+  imports: [
+    PillalasAlVueloSharedModule,
+    RouterModule.forChild(ENTITY_STATES),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA3oNg0Hg98Mscqm-9I-HxTV-q-Wu7vMTI'
+    })
+  ],
   declarations: [
     ObservatorioComponent,
     ObservatorioDetailComponent,
