@@ -7,10 +7,10 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entidades",
-        "observatorio": "Observatorio",
-        "ave": "Ave",
-        "avistamiento": "Avistamiento",
-        "fotografia": "Fotografia",
+        "observatorio": "Puestos Observ.",
+        "ave": "Aves",
+        "avistamiento": "Avistamientos",
+        "fotografia": "Fotografias",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

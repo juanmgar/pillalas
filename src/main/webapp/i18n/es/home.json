@@ -1,7 +1,7 @@
 {
   "home": {
-    "title": "¡Bienvenido, Java Hipster!",
-    "subtitle": "Esta es su página de inicio",
+    "title": "¡Bienvenido a Píllalas al vuelo!",
+    "subtitle": "La web para los amantes de las aves",
     "logged": {
       "message": "Está conectado como \"{{username}}\"."
     },

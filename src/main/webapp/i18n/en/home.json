@@ -1,7 +1,7 @@
 {
   "home": {
-    "title": "Welcome, Java Hipster!",
-    "subtitle": "This is your homepage",
+    "title": "Welcome, Píllalas al Vuelo!",
+    "subtitle": "The web for bird lovers",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
