@@ -1,0 +1,26 @@
+{
+  "pillalasAlVueloApp": {
+    "fotografia": {
+      "home": {
+        "title": "Fotografias",
+        "createLabel": "Create a new Fotografia",
+        "createOrEditLabel": "Create or edit a Fotografia",
+        "notFound": "No Fotografia found"
+      },
+      "created": "A new Fotografia is created with identifier {{ param }}",
+      "updated": "A Fotografia is updated with identifier {{ param }}",
+      "deleted": "A Fotografia is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Fotografia {{ id }}?"
+      },
+      "detail": {
+        "title": "Fotografia"
+      },
+      "nombre": "Nombre",
+      "fichero": "Fichero",
+      "ave": "Ave",
+      "avistamiento": "Avistamiento",
+      "observatorio": "Observatorio"
+    }
+  }
+}

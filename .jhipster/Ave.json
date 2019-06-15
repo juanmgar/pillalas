@@ -1,0 +1,66 @@
+{
+    "name": "Ave",
+    "fields": [
+        {
+            "fieldName": "nombreComun",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "nombreCientifico",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "foto",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "sonido",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "fotografia",
+            "otherEntityRelationshipName": "ave",
+            "relationshipName": "foto"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "observatorio",
+            "otherEntityRelationshipName": "ave",
+            "relationshipName": "observatorio",
+            "otherEntityField": "id",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "avistamiento",
+            "otherEntityRelationshipName": "ave",
+            "relationshipName": "avistamiento",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190615103455",
+    "entityTableName": "ave",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
