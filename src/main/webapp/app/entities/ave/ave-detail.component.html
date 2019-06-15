@@ -1,7 +1,20 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-5">
+        <div *ngIf="ave.foto">
+            <a (click)="openFile(ave.fotoContentType, ave.foto)">
+                <img [src]="'data:' + ave.fotoContentType + ';base64,' + ave.foto" style="max-width: 100%;"
+                    alt="ave image" />
+            </a>
+        </div>
+        <div *ngIf="ave.sonido">
+            <audio [src]="srcData" controls>
+                <p>Tu navegador no implementa el elemento audio.</p>
+            </audio>
+        </div>
+    </div>
+    <div class="col-7">
         <div *ngIf="ave">
-            <h2><span jhiTranslate="pillalasAlVueloApp.ave.detail.title">Ave</span> {{ave.id}}</h2>
+            <h2>{{ave.nombreComun}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
@@ -11,43 +24,19 @@
                 </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.ave.nombreCientifico">Nombre Cientifico</span></dt>
                 <dd>
-                    <span>{{ave.nombreCientifico}}</span>
+                    <em>{{ave.nombreCientifico}}</em>
                 </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.ave.descripcion">Descripcion</span></dt>
                 <dd>
                     <span>{{ave.descripcion}}</span>
                 </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.ave.foto">Foto</span></dt>
-                <dd>
-                    <div *ngIf="ave.foto">
-                        <a (click)="openFile(ave.fotoContentType, ave.foto)">
-                            <img [src]="'data:' + ave.fotoContentType + ';base64,' + ave.foto" style="max-width: 100%;" alt="ave image"/>
-                        </a>
-                        {{ave.fotoContentType}}, {{byteSize(ave.foto)}}
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.ave.sonido">Sonido</span></dt>
-                <dd>
-                    <div *ngIf="ave.sonido">
-                        <a (click)="openFile(ave.sonidoContentType, ave.sonido)" jhiTranslate="entity.action.open">open</a>
-                        {{ave.sonidoContentType}}, {{byteSize(ave.sonido)}}
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.ave.autor">Autor</span></dt>
-                <dd>
-                    {{ave.autor?.id}}
-                </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/ave', ave.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/ave', ave.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

@@ -2,28 +2,27 @@
   "pillalasAlVueloApp": {
     "ave": {
       "home": {
-        "title": "Aves",
-        "createLabel": "Create a new Ave",
-        "createOrEditLabel": "Create or edit a Ave"
+        "title": "Birds",
+        "createLabel": "Create a new Bird File",
+        "createOrEditLabel": "Create or edit a Bird File"
       },
-      "created": "A new Ave is created with identifier {{ param }}",
-      "updated": "A Ave is updated with identifier {{ param }}",
-      "deleted": "A Ave is deleted with identifier {{ param }}",
+      "created": "A new Bird File is created with identifier {{ param }}",
+      "updated": "A Bird File is updated with identifier {{ param }}",
+      "deleted": "A Bird File is deleted with identifier {{ param }}",
       "delete": {
         "question": "Are you sure you want to delete Ave {{ id }}?"
       },
       "detail": {
-        "title": "Ave"
+        "title": "Bird"
       },
-      "nombreComun": "Nombre Comun",
-      "nombreCientifico": "Nombre Cientifico",
-      "descripcion": "Descripcion",
-      "foto": "Foto",
-      "sonido": "Sonido",
-      "autor": "Autor",
-      "foto": "Foto",
-      "observatorio": "Observatorio",
-      "avistamiento": "Avistamiento"
+      "nombreComun": "Common name",
+      "nombreCientifico": "Scientific name",
+      "descripcion": "Description",
+      "foto": "Photo",
+      "sonido": "Sound",
+      "autor": "Author",
+      "observatorio": "Observation posts",
+      "avistamiento": "Sightings"
     }
   }
 }

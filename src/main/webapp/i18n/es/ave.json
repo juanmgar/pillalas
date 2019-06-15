@@ -3,14 +3,14 @@
     "ave": {
       "home": {
         "title": "Aves",
-        "createLabel": "Crear nuevo Ave",
-        "createOrEditLabel": "Crear o editar Ave"
+        "createLabel": "Crear ficha de Ave",
+        "createOrEditLabel": "Crear o editar ficha Ave"
       },
-      "created": "Un nuevo Ave ha sido creado con el identificador {{ param }}",
-      "updated": "Un Ave ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Ave ha sido eliminado con el identificador {{ param }}",
+      "created": "Un nueva ficha ha sido creada con el identificador {{ param }}",
+      "updated": "Una ficha ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Una ficha ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Ave {{ id }}?"
+        "question": "¿Seguro que quiere eliminar la ficha {{ id }}?"
       },
       "detail": {
         "title": "Ave"
