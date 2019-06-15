@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fotografia">
+            <h2><span jhiTranslate="pillalasAlVueloApp.fotografia.detail.title">Fotografia</span> {{fotografia.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.nombre">Nombre</span></dt>
+                <dd>
+                    <span>{{fotografia.nombre}}</span>
+                </dd>
+                <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.fichero">Fichero</span></dt>
+                <dd>
+                    <div *ngIf="fotografia.fichero">
+                        <a (click)="openFile(fotografia.ficheroContentType, fotografia.fichero)">
+                            <img [src]="'data:' + fotografia.ficheroContentType + ';base64,' + fotografia.fichero" style="max-width: 100%;" alt="fotografia image"/>
+                        </a>
+                        {{fotografia.ficheroContentType}}, {{byteSize(fotografia.fichero)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.ave">Ave</span></dt>
+                <dd>
+                    <div *ngIf="fotografia.ave">
+                        <a [routerLink]="['/ave', fotografia.ave?.id, 'view']">{{fotografia.ave?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fotografia', fotografia.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

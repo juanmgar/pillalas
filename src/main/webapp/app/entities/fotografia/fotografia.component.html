@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="pillalasAlVueloApp.fotografia.home.title">Fotografias</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-fotografia" [routerLink]="['/fotografia/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="pillalasAlVueloApp.fotografia.home.createLabel">
+            Create new Fotografia
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="fotografias?.length === 0">
+        <span jhiTranslate="pillalasAlVueloApp.fotografia.home.notFound">No fotografias found</span>
+    </div>
+    <div class="table-responsive" *ngIf="fotografias?.length > 0">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nombre"><span jhiTranslate="pillalasAlVueloApp.fotografia.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fichero"><span jhiTranslate="pillalasAlVueloApp.fotografia.fichero">Fichero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="ave.id"><span jhiTranslate="pillalasAlVueloApp.fotografia.ave">Ave</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let fotografia of fotografias ;trackBy: trackId">
+                <td><a [routerLink]="['/fotografia', fotografia.id, 'view' ]">{{fotografia.id}}</a></td>
+                <td>{{fotografia.nombre}}</td>
+                <td>
+                    <a *ngIf="fotografia.fichero" (click)="openFile(fotografia.ficheroContentType, fotografia.fichero)">
+                        <img [src]="'data:' + fotografia.ficheroContentType + ';base64,' + fotografia.fichero" style="max-height: 30px;" alt="fotografia image"/>
+                    </a>
+                    <span *ngIf="fotografia.fichero">{{fotografia.ficheroContentType}}, {{byteSize(fotografia.fichero)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="fotografia.ave">
+                        <a [routerLink]="['../ave', fotografia.ave?.id, 'view' ]" >{{fotografia.ave?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/fotografia', fotografia.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/fotografia', fotografia.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'fotografia', { outlets: { popup: fotografia.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="fotografias?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

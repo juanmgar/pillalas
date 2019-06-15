@@ -11,6 +11,13 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql, mariadb"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190615103454_added_entity_Observatorio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190615103455_added_entity_Ave.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190615103456_added_entity_Avistamiento.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190615103457_added_entity_Fotografia.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20190615103454_added_entity_constraints_Observatorio.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190615103456_added_entity_constraints_Avistamiento.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190615103457_added_entity_constraints_Fotografia.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

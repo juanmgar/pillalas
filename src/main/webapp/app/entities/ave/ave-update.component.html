@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-ave-heading" jhiTranslate="pillalasAlVueloApp.ave.home.createOrEditLabel">Create or edit a Ave</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.ave.nombreComun" for="field_nombreComun">Nombre Comun</label>
+                    <input type="text" class="form-control" name="nombreComun" id="field_nombreComun"
+                           formControlName="nombreComun"/>
+                    <div *ngIf="editForm.get('nombreComun').invalid && (editForm.get('nombreComun').dirty || editForm.get('nombreComun').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nombreComun').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.ave.nombreCientifico" for="field_nombreCientifico">Nombre Cientifico</label>
+                    <input type="text" class="form-control" name="nombreCientifico" id="field_nombreCientifico"
+                           formControlName="nombreCientifico"/>
+                    <div *ngIf="editForm.get('nombreCientifico').invalid && (editForm.get('nombreCientifico').dirty || editForm.get('nombreCientifico').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nombreCientifico').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.ave.descripcion" for="field_descripcion">Descripcion</label>
+                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                           formControlName="descripcion"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.ave.foto" for="field_foto">Foto</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('fotoContentType').value + ';base64,' + editForm.get('foto').value" style="max-height: 100px;" *ngIf="editForm.get('foto').value" alt="ave image"/>
+                        <div *ngIf="editForm.get('foto').value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{editForm.get('fotoContentType').value}}, {{byteSize(editForm.get('foto').value)}}</span>
+                            <button type="button" (click)="clearInputImage('foto', 'fotoContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_foto" (change)="setFileData($event, 'foto', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="foto" id="field_foto"
+                           formControlName="foto"/>
+                    <input type="hidden" class="form-control" name="fotoContentType" id="field_fotoContentType"
+                           formControlName="fotoContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.ave.sonido" for="field_sonido">Sonido</label>
+                    <div>
+                        <div *ngIf="editForm.get('sonido').value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('sonidoContentType').value, editForm.get('sonido').value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{editForm.get('sonidoContentType').value}}, {{byteSize(editForm.get('sonido').value)}}</span>
+                            <button type="button" (click)="editForm.patchValue({sonido: null});editForm.patchValue({sonidoContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_sonido" (change)="setFileData($event, 'sonido', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="sonido" id="field_sonido"
+                           formControlName="sonido"/>
+                    <input type="hidden" class="form-control" name="sonidoContentType" id="field_sonidoContentType"
+                           formControlName="sonidoContentType" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

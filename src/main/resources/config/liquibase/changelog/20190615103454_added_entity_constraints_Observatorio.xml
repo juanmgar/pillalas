@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Observatorio.
+    -->
+    <changeSet id="20190615103454-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="observatorio_id"
+                                 baseTableName="observatorio_observatorio"
+                                 constraintName="fk_observatorio_observatorio_observatorio_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="observatorio"/>
+
+        <addForeignKeyConstraint baseColumnNames="observatorio_id"
+                                 baseTableName="observatorio_observatorio"
+                                 constraintName="fk_observatorio_observatorio_observatorio_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fotografia"/>
+        
+        <addForeignKeyConstraint baseColumnNames="observatorio_id"
+                                 baseTableName="observatorio_ave"
+                                 constraintName="fk_observatorio_ave_observatorio_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="observatorio"/>
+
+        <addForeignKeyConstraint baseColumnNames="ave_id"
+                                 baseTableName="observatorio_ave"
+                                 constraintName="fk_observatorio_ave_ave_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ave"/>
+        
+    </changeSet>
+</databaseChangeLog>

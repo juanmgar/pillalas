@@ -1,0 +1,28 @@
+{
+  "pillalasAlVueloApp": {
+    "observatorio": {
+      "home": {
+        "title": "Observatorios",
+        "createLabel": "Crear nuevo Observatorio",
+        "createOrEditLabel": "Crear o editar Observatorio",
+        "notFound": "No Observatorio found"
+      },
+      "created": "Un nuevo Observatorio ha sido creado con el identificador {{ param }}",
+      "updated": "Un Observatorio ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Observatorio ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Observatorio {{ id }}?"
+      },
+      "detail": {
+        "title": "Observatorio"
+      },
+      "nombre": "Nombre",
+      "latitud": "Latitud",
+      "longitud": "Longitud",
+      "foto": "Foto",
+      "descripcion": "Descripcion",
+      "observatorio": "Observatorio",
+      "ave": "Ave"
+    }
+  }
+}

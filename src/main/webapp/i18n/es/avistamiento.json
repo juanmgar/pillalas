@@ -1,0 +1,28 @@
+{
+  "pillalasAlVueloApp": {
+    "avistamiento": {
+      "home": {
+        "title": "Avistamientos",
+        "createLabel": "Crear nuevo Avistamiento",
+        "createOrEditLabel": "Crear o editar Avistamiento",
+        "notFound": "No Avistamiento found"
+      },
+      "created": "Un nuevo Avistamiento ha sido creado con el identificador {{ param }}",
+      "updated": "Un Avistamiento ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Avistamiento ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Avistamiento {{ id }}?"
+      },
+      "detail": {
+        "title": "Avistamiento"
+      },
+      "nombre": "Nombre",
+      "fecha": "Fecha",
+      "latitud": "Latitud",
+      "longitud": "Longitud",
+      "descripcion": "Descripcion",
+      "foto": "Foto",
+      "ave": "Ave"
+    }
+  }
+}

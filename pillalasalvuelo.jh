@@ -32,16 +32,12 @@ relationship OneToMany {
   	Ave{foto} to Fotografia{ave}
 }
 
-relationship OneToMany {
+relationship ManyToMany {
   	Avistamiento{foto} to Fotografia{avistamiento}
 }
 
-relationship OneToMany {
+relationship ManyToMany {
   	Observatorio{observatorio} to Fotografia{observatorio}
-}
-
-relationship OneToMany {
-  	User{fotografia} to Fotografia{usuario}
 }
 
 relationship ManyToMany {
