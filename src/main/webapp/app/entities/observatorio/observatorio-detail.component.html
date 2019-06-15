@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-5">
         <div *ngIf="observatorio.foto">
-            <a (click)="openFile(observatorio.fotoContentType, ave.foto)">
+            <a (click)="openFile(observatorio.fotoContentType, observatorio.foto)">
                 <img class="border border-secondary" [src]="'data:' + observatorio.fotoContentType + ';base64,' + observatorio.foto"
                     style="max-width: 100%;" alt="observatorio image" />
             </a>
@@ -27,11 +27,11 @@
                 </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.ave">Aves que puedes encontrar</span></dt>
                 <dd>
-                    <span *ngFor="let ave of observatorio.aves; let last = last">
+                    <span *ngFor="let ave of observatorio.aves">
                         <a (click)="openFile(ave.fotoContentType, ave.foto)">
                             <img [src]="'data:' + ave.fotoContentType + ';base64,' + ave.foto" class="img-thumbnail img-fluid col-2" alt="ave image" />
                         </a>
-                        <a [routerLink]="['/ave', ave?.id, 'view' ]">{{ave.nombreComun}}</a>{{last ? '' : ''}}
+                        <a [routerLink]="['/ave', ave?.id, 'view' ]">{{ave.nombreComun}}</a>
                     </span>
                 </dd>
             </dl>
