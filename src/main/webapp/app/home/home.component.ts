@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   searchString: string;
   results: Ave[];
   resultsObs: Observatorio[];
+  resultsVisible: boolean;
 
   constructor(
     private accountService: AccountService,
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
     this.accountService.identity().then((account: Account) => {
       this.account = account;
     });
+    this.resultsVisible = false;
     this.registerAuthenticationSuccess();
   }
 
@@ -55,6 +57,7 @@ export class HomeComponent implements OnInit {
   autocomplete() {
     if (this.searchString == undefined || this.searchString == '') {
       this.results = [];
+      this.resultsVisible = false;
     } else {
       this.aveService
         .findTextos(this.searchString)
@@ -62,6 +65,7 @@ export class HomeComponent implements OnInit {
       this.observatorioService
         .findTextos(this.searchString)
         .subscribe((res: HttpResponse<Ave[]>) => (this.resultsObs = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+      this.resultsVisible = true;
     }
   }
 

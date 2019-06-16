@@ -150,3 +150,36 @@
   -webkit-animation-delay: 0s;
   animation-delay: 0s;
 }
+
+#pav-svg #pav-img {
+  background-image: url('../../content/images/logo-bird.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 180px;
+  height: 160px;
+}
+
+.app-loading #pav-svg {
+  -webkit-animation: lds-pav 1s linear infinite;
+  animation: lds-pav 1s linear infinite;
+  width: 180px;
+  text-align: center;
+}
+
+@keyframes lds-pav {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+@-webkit-keyframes lds-pav {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}

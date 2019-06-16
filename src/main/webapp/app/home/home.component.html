@@ -3,11 +3,12 @@
         <video playsinline autoplay muted loop>
             <source src="../../content/images/video-home.mp4" type="video/mp4">
         </video>
-        <div class="container text-white">
+        <div class="container text-white m-3 p-5">
             <h1 class="display-4" jhiTranslate="home.title">¡Bienvenido a píllalas al vuelo!</h1>
             <p class="lead" jhiTranslate="home.subtitle">La web para los amantes de las aves</p>
         </div>
-        <div class="buscador">
+
+        <div class="buscador m-2 p-3">
             <input class="buscador" autocomplete="false" type="text" (keyup)="autocomplete()"
                 class="form-control col-12 mb-1" id="searchString" placeholder="Busca aves u observatorios..." autofocus
                 name="searchString" [(ngModel)]="searchString" />
@@ -15,12 +16,12 @@
     </div>
 </div>
 
-<div class="justify-content-center m-3 p-2">
-    <div class="border align-content">
-        <div *ngIf="(results && results.length > 0) || resultsObs && resultsObs.length > 0">
-            <h3 class="text-center">Resultado de la búsqueda</h3>
-            <hr>
-            </br>
+<div class="justify-content-center p-2">
+    <div *ngIf="resultsVisible && searchString" class="border align-content">
+        <h3 class="text-center">Resultado de la búsqueda</h3>
+        <hr>
+        </br>
+        <div *ngIf="(results && results.length > 0) || (resultsObs && resultsObs.length > 0)">
             <span *ngFor="let resultsNext of results ;let i = index">
                 <a [routerLink]="['/ave', resultsNext.id, 'view' ]"><img
                         [src]="'data:' + resultsNext.fotoContentType + ';base64,' + resultsNext.foto"
@@ -41,6 +42,10 @@
                 </button>
             </span>
         </div>
+        <div class="p-3" *ngIf="(results && results.length == 0) && (resultsObs && resultsObs.length == 0)">
+            <p>No se han encontrado resultados</p>
+        </div>
+
     </div>
 </div>
 
@@ -76,5 +81,3 @@
     <li><span jhiTranslate="home.link.colaborar">Colaborar con la comunidad añadiendo nuevas especies,
             observatorios y fotografías</span></li>
 </ul>
-</div>
-</div>
