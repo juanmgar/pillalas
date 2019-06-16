@@ -55,7 +55,7 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button" [routerLink]="['/observatorio', observatorio.id, 'edit']"
+            <button *ngIf="isAuthenticated()" type="button" [routerLink]="['/observatorio', observatorio.id, 'edit']"
                 class="btn btn-primary mt-2">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>

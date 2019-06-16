@@ -4,6 +4,7 @@ import { JhiDataUtils } from 'ng-jhipster';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { IAve } from 'app/shared/model/ave.model';
+import { AccountService } from 'app/core';
 
 @Component({
   selector: 'jhi-ave-detail',
@@ -13,7 +14,12 @@ export class AveDetailComponent implements OnInit {
   ave: IAve;
   srcData: SafeResourceUrl;
 
-  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute, private sanitizer: DomSanitizer) {}
+  constructor(
+    protected dataUtils: JhiDataUtils,
+    protected activatedRoute: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    protected accountService: AccountService
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ ave }) => {
@@ -31,5 +37,9 @@ export class AveDetailComponent implements OnInit {
   }
   previousState() {
     window.history.back();
+  }
+
+  isAuthenticated() {
+    return this.accountService.isAuthenticated();
   }
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
 import { IObservatorio } from 'app/shared/model/observatorio.model';
+import { AccountService } from 'app/core';
 
 @Component({
   selector: 'jhi-observatorio-detail',
@@ -15,7 +16,7 @@ export class ObservatorioDetailComponent implements OnInit {
   longitude: Number;
   mapType = 'satellite';
 
-  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute) {}
+  constructor(protected dataUtils: JhiDataUtils, protected activatedRoute: ActivatedRoute, protected accountService: AccountService) {}
 
   ngOnInit() {
     this.activatedRoute.data.subscribe(({ observatorio }) => {
@@ -34,5 +35,8 @@ export class ObservatorioDetailComponent implements OnInit {
   }
   previousState() {
     window.history.back();
+  }
+  isAuthenticated() {
+    return this.accountService.isAuthenticated();
   }
 }

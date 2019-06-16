@@ -81,8 +81,6 @@ export class AveComponent implements OnInit, OnDestroy {
   }
 
   isAuthenticated() {
-    let variable = this.accountService.isAuthenticated();
-    console.log(variable);
     return this.accountService.isAuthenticated();
   }
 
