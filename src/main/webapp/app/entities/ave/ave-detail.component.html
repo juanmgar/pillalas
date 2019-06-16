@@ -6,6 +6,9 @@
                     alt="ave image" />
             </a>
         </div>
+        <div *ngIf="!ave.foto">
+            <img class="border border-secondary" src="../../../content/images/no-img.png" alt="observatorio image" />
+        </div>
         <div *ngIf="ave.sonido">
             <audio [src]="srcData" controls>
                 <p>Tu navegador no implementa el elemento audio.</p>

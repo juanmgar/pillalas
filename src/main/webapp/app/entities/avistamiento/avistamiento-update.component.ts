@@ -15,11 +15,15 @@ import { AveService } from 'app/entities/ave';
 
 @Component({
   selector: 'jhi-avistamiento-update',
+  styles: ['agm-map { height: 300px; /* height is required */ }'],
   templateUrl: './avistamiento-update.component.html'
 })
 export class AvistamientoUpdateComponent implements OnInit {
   avistamiento: IAvistamiento;
   isSaving: boolean;
+  latitude: Number;
+  longitude: Number;
+  mapType = 'satellite';
 
   users: IUser[];
 
@@ -29,8 +33,6 @@ export class AvistamientoUpdateComponent implements OnInit {
     id: [],
     nombre: [null, [Validators.required]],
     fecha: [null, [Validators.required]],
-    latitud: [null, [Validators.required]],
-    longitud: [null, [Validators.required]],
     descripcion: [],
     autor: [],
     aves: []
@@ -51,6 +53,13 @@ export class AvistamientoUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ avistamiento }) => {
       this.updateForm(avistamiento);
       this.avistamiento = avistamiento;
+      if (this.avistamiento.latitud == undefined) {
+        this.latitude = 43.524163;
+        this.longitude = -5.615905;
+      } else {
+        this.latitude = Number(avistamiento.latitud);
+        this.longitude = Number(avistamiento.longitud);
+      }
     });
     this.userService
       .query()
@@ -73,8 +82,6 @@ export class AvistamientoUpdateComponent implements OnInit {
       id: avistamiento.id,
       nombre: avistamiento.nombre,
       fecha: avistamiento.fecha != null ? avistamiento.fecha.format(DATE_TIME_FORMAT) : null,
-      latitud: avistamiento.latitud,
-      longitud: avistamiento.longitud,
       descripcion: avistamiento.descripcion,
       autor: avistamiento.autor,
       aves: avistamiento.aves
@@ -87,6 +94,11 @@ export class AvistamientoUpdateComponent implements OnInit {
 
   openFile(contentType, field) {
     return this.dataUtils.openFile(contentType, field);
+  }
+
+  onChooseLocation(event) {
+    this.latitude = event.coords.lat;
+    this.longitude = event.coords.lng;
   }
 
   setFileData(event, field: string, isImage) {
@@ -120,6 +132,8 @@ export class AvistamientoUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const avistamiento = this.createFromForm();
+    avistamiento.latitud = this.latitude.toString();
+    avistamiento.longitud = this.longitude.toString();
     if (avistamiento.id !== undefined) {
       this.subscribeToSaveResponse(this.avistamientoService.update(avistamiento));
     } else {
@@ -133,8 +147,6 @@ export class AvistamientoUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       nombre: this.editForm.get(['nombre']).value,
       fecha: this.editForm.get(['fecha']).value != null ? moment(this.editForm.get(['fecha']).value, DATE_TIME_FORMAT) : undefined,
-      latitud: this.editForm.get(['latitud']).value,
-      longitud: this.editForm.get(['longitud']).value,
       descripcion: this.editForm.get(['descripcion']).value,
       autor: this.editForm.get(['autor']).value,
       aves: this.editForm.get(['aves']).value

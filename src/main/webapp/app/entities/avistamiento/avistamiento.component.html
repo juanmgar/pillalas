@@ -17,8 +17,6 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nombre"><span jhiTranslate="pillalasAlVueloApp.avistamiento.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fecha"><span jhiTranslate="pillalasAlVueloApp.avistamiento.fecha">Fecha</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="latitud"><span jhiTranslate="pillalasAlVueloApp.avistamiento.latitud">Latitud</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="longitud"><span jhiTranslate="pillalasAlVueloApp.avistamiento.longitud">Longitud</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="descripcion"><span jhiTranslate="pillalasAlVueloApp.avistamiento.descripcion">Descripcion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="autor.id"><span jhiTranslate="pillalasAlVueloApp.avistamiento.autor">Autor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
@@ -29,11 +27,9 @@
                 <td><a [routerLink]="['/avistamiento', avistamiento.id, 'view' ]">{{avistamiento.id}}</a></td>
                 <td>{{avistamiento.nombre}}</td>
                 <td>{{avistamiento.fecha | date:'medium'}}</td>
-                <td>{{avistamiento.latitud}}</td>
-                <td>{{avistamiento.longitud}}</td>
                 <td>{{avistamiento.descripcion}}</td>
                 <td>
-                    {{avistamiento.autor?.id}}
+                    {{avistamiento.autor?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group">

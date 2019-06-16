@@ -14,7 +14,6 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nombre"><span jhiTranslate="pillalasAlVueloApp.fotografia.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fichero"><span jhiTranslate="pillalasAlVueloApp.fotografia.fichero">Fichero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="avistamiento.id"><span jhiTranslate="pillalasAlVueloApp.fotografia.avistamiento">Avistamiento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -25,26 +24,24 @@
             </thead>
             <tbody>
             <tr *ngFor="let fotografia of fotografias ;trackBy: trackId">
-                <td><a [routerLink]="['/fotografia', fotografia.id, 'view' ]">{{fotografia.id}}</a></td>
                 <td>{{fotografia.nombre}}</td>
                 <td>
                     <a *ngIf="fotografia.fichero" (click)="openFile(fotografia.ficheroContentType, fotografia.fichero)">
                         <img [src]="'data:' + fotografia.ficheroContentType + ';base64,' + fotografia.fichero" style="max-height: 30px;" alt="fotografia image"/>
                     </a>
-                    <span *ngIf="fotografia.fichero">{{fotografia.ficheroContentType}}, {{byteSize(fotografia.fichero)}}</span>
                 </td>
                 <td>
                     <div *ngIf="fotografia.avistamiento">
-                        <a [routerLink]="['../avistamiento', fotografia.avistamiento?.id, 'view' ]" >{{fotografia.avistamiento?.id}}</a>
+                        <a [routerLink]="['../avistamiento', fotografia.avistamiento?.id, 'view' ]" >{{fotografia.avistamiento?.nombre}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="fotografia.observatorio">
-                        <a [routerLink]="['../observatorio', fotografia.observatorio?.id, 'view' ]" >{{fotografia.observatorio?.id}}</a>
+                        <a [routerLink]="['../observatorio', fotografia.observatorio?.id, 'view' ]" >{{fotografia.observatorio?.nombre}}</a>
                     </div>
                 </td>
                 <td>
-                    {{fotografia.autor?.id}}
+                    {{fotografia.autor?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group">

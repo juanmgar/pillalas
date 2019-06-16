@@ -31,10 +31,9 @@
                     <a *ngIf="ave.foto" (click)="openFile(ave.fotoContentType, ave.foto)">
                         <img [src]="'data:' + ave.fotoContentType + ';base64,' + ave.foto" style="max-height: 30px;" alt="ave image"/>
                     </a>
-                    <span *ngIf="ave.foto">{{ave.fotoContentType}}</span>
                 </td>
                 <td>
-                    {{ave.autor?.id}}
+                    {{ave.autor?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group">

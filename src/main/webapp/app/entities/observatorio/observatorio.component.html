@@ -35,10 +35,9 @@
                     <a *ngIf="observatorio.foto" (click)="openFile(observatorio.fotoContentType, observatorio.foto)">
                         <img [src]="'data:' + observatorio.fotoContentType + ';base64,' + observatorio.foto" style="max-height: 30px;" alt="observatorio image"/>
                     </a>
-                    <span *ngIf="observatorio.foto">{{observatorio.fotoContentType}}, {{byteSize(observatorio.foto)}}</span>
                 </td>
                 <td>
-                    {{observatorio.autor?.id}}
+                    {{observatorio.autor?.login}}
                 </td>
                 <td class="text-right">
                     <div class="btn-group">

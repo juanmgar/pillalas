@@ -36,27 +36,27 @@
                     <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.fotografia.avistamiento" for="field_avistamiento">Avistamiento</label>
                     <select class="form-control" id="field_avistamiento" name="avistamiento" formControlName="avistamiento">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="avistamientoOption.id === editForm.get('avistamiento').value?.id ? editForm.get('avistamiento').value : avistamientoOption" *ngFor="let avistamientoOption of avistamientos; trackBy: trackAvistamientoById">{{avistamientoOption.id}}</option>
+                        <option [ngValue]="avistamientoOption.id === editForm.get('avistamiento').value?.id ? editForm.get('avistamiento').value : avistamientoOption" *ngFor="let avistamientoOption of avistamientos; trackBy: trackAvistamientoById">{{avistamientoOption.nombre}} // {{avistamientoOption.fecha}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.fotografia.observatorio" for="field_observatorio">Observatorio</label>
                     <select class="form-control" id="field_observatorio" name="observatorio" formControlName="observatorio">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="observatorioOption.id === editForm.get('observatorio').value?.id ? editForm.get('observatorio').value : observatorioOption" *ngFor="let observatorioOption of observatorios; trackBy: trackObservatorioById">{{observatorioOption.id}}</option>
+                        <option [ngValue]="observatorioOption.id === editForm.get('observatorio').value?.id ? editForm.get('observatorio').value : observatorioOption" *ngFor="let observatorioOption of observatorios; trackBy: trackObservatorioById">{{observatorioOption.nombre}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.fotografia.autor" for="field_autor">Autor</label>
                     <select class="form-control" id="field_autor" name="autor" formControlName="autor">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === editForm.get('autor').value?.id ? editForm.get('autor').value : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                        <option [ngValue]="userOption.id === editForm.get('autor').value?.id ? editForm.get('autor').value : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="pillalasAlVueloApp.fotografia.ave" for="field_aves">Ave</label>
                     <select class="form-control" id="field_aves" multiple name="aves" formControlName="aves">
-                        <option [ngValue]="getSelected(editForm.get('aves').value, aveOption)" *ngFor="let aveOption of aves; trackBy: trackAveById">{{aveOption.id}}</option>
+                        <option [ngValue]="getSelected(editForm.get('aves').value, aveOption)" *ngFor="let aveOption of aves; trackBy: trackAveById">{{aveOption.nombreComun}}</option>
                     </select>
                 </div>
             </div>

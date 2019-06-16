@@ -1,57 +1,52 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <div *ngIf="avistamiento">
-            <h2><span jhiTranslate="pillalasAlVueloApp.avistamiento.detail.title">Avistamiento</span> {{avistamiento.id}}</h2>
-            <hr>
-            <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.nombre">Nombre</span></dt>
-                <dd>
-                    <span>{{avistamiento.nombre}}</span>
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.fecha">Fecha</span></dt>
-                <dd>
-                    <span>{{avistamiento.fecha}}</span>
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.latitud">Latitud</span></dt>
-                <dd>
-                    <span>{{avistamiento.latitud}}</span>
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.longitud">Longitud</span></dt>
-                <dd>
-                    <span>{{avistamiento.longitud}}</span>
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.descripcion">Descripcion</span></dt>
-                <dd>
-                    <span>{{avistamiento.descripcion}}</span>
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.autor">Autor</span></dt>
-                <dd>
-                    {{avistamiento.autor?.id}}
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.ave">Ave</span></dt>
-                <dd>
-                    <span *ngFor="let ave of avistamiento.aves; let last = last">
-                        <a [routerLink]="['/ave', ave?.id, 'view' ]">{{ave.id}}</a>{{last ? '' : ', '}}
-                    </span>
-                </dd>
-            </dl>
 
-            <agm-map [latitude]="latitude" [longitude]="longitude">
-                <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    <div class="col-5">
+        <agm-map [latitude]="latitude" [longitude]="longitude">
+            <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
         </agm-map>
+        <div class="m-2 p-2">
+            <p><em jhiTranslate="pillalasAlVueloApp.avistamiento.latitud">Latitud</em>:
+                <span>{{avistamiento.latitud}}</span></p>
+            <p> <em jhiTranslate="pillalasAlVueloApp.avistamiento.longitud">Longitud</em>:
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-            </button>
+                <span>{{avistamiento.longitud}}</span></p>
 
-            <button type="button"
-                    [routerLink]="['/avistamiento', avistamiento.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
         </div>
+    </div>
+    <div class="col-7">
+        <h2><span jhiTranslate="pillalasAlVueloApp.avistamiento.detail.title">Avistamiento</span> {{avistamiento.id}}
+        </h2>
+        <hr>
+        <jhi-alert-error></jhi-alert-error>
+        <dl class="row-md jh-entity-details">
+            <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.fecha">Fecha</span></dt>
+            <dd>
+                <span>{{avistamiento.fecha}}</span>
+            </dd>
+            <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.descripcion">Descripcion</span></dt>
+            <dd>
+                <span>{{avistamiento.descripcion}}</span>
+            </dd>
+            <dt><span jhiTranslate="pillalasAlVueloApp.avistamiento.ave">Ave</span></dt>
+            <dd>
+                <span *ngFor="let ave of avistamiento.aves; let last = last">
+                    <a *ngIf="ave.foto" (click)="openFile(ave.fotoContentType, ave.foto)">
+                        <img [src]="'data:' + ave.fotoContentType + ';base64,' + ave.foto"
+                            class="img-thumbnail img-fluid col-2" alt="ave image" />
+                    </a>
+                    <img *ngIf="!ave.foto" src="../../../content/images/no-img.png"
+                        class="img-thumbnail img-fluid col-2" alt="ave image" />
+                    <a [routerLink]="['/ave', ave?.id, 'view' ]">{{ave.nombreComun}}</a>{{last ? '' : ''}}
+                </span>
+            </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info">
+            <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/avistamiento', avistamiento.id, 'edit']" class="btn btn-primary">
+            <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+        </button>
     </div>
 </div>

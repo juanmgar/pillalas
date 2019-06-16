@@ -13,44 +13,53 @@
                 <dd>
                     <div *ngIf="fotografia.fichero">
                         <a (click)="openFile(fotografia.ficheroContentType, fotografia.fichero)">
-                            <img [src]="'data:' + fotografia.ficheroContentType + ';base64,' + fotografia.fichero" style="max-width: 100%;" alt="fotografia image"/>
+                            <img [src]="'data:' + fotografia.ficheroContentType + ';base64,' + fotografia.fichero"
+                                style="max-width: 100%;" alt="fotografia image" />
                         </a>
                         {{fotografia.ficheroContentType}}, {{byteSize(fotografia.fichero)}}
                     </div>
+                    <div *ngIf="!fotografia.fichero">
+                        <img src="../../../content/images/no-img.png" alt="fotografia image" />
                 </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.avistamiento">Avistamiento</span></dt>
                 <dd>
                     <div *ngIf="fotografia.avistamiento">
-                        <a [routerLink]="['/avistamiento', fotografia.avistamiento?.id, 'view']">{{fotografia.avistamiento?.id}}</a>
+                        <a
+                            [routerLink]="['/avistamiento', fotografia.avistamiento?.id, 'view']">{{fotografia.avistamiento?.nombre}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.observatorio">Observatorio</span></dt>
                 <dd>
                     <div *ngIf="fotografia.observatorio">
-                        <a [routerLink]="['/observatorio', fotografia.observatorio?.id, 'view']">{{fotografia.observatorio?.id}}</a>
+                        <a
+                            [routerLink]="['/observatorio', fotografia.observatorio?.id, 'view']">{{fotografia.observatorio?.nombre}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.autor">Autor</span></dt>
                 <dd>
-                    {{fotografia.autor?.id}}
+                    {{fotografia.autor?.login}}
                 </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.fotografia.ave">Ave</span></dt>
                 <dd>
                     <span *ngFor="let ave of fotografia.aves; let last = last">
-                        <a [routerLink]="['/ave', ave?.id, 'view' ]">{{ave.id}}</a>{{last ? '' : ', '}}
+                        <a *ngIf="ave.foto" (click)="openFile(ave.fotoContentType, ave.foto)">
+                            <img [src]="'data:' + ave.fotoContentType + ';base64,' + ave.foto"
+                                class="img-thumbnail img-fluid col-2" alt="ave image" />
+                        </a>
+                        <a *ngIf="!ave.foto" (click)="openFile(ave.fotoContentType, ave.foto)">
+                            <img src="../../../content/images/no-img.png"
+                                class="img-thumbnail img-fluid col-2" alt="ave image" />
+                        </a>
+                        <a [routerLink]="['/ave', ave?.id, 'view' ]">{{ave.nombreComun}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
+            <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/fotografia', fotografia.id, 'edit']"
-                    class="btn btn-primary">
+            <button type="button" [routerLink]="['/fotografia', fotografia.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

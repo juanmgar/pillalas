@@ -13,12 +13,15 @@ import { AveService } from 'app/entities/ave';
 
 @Component({
   selector: 'jhi-observatorio-update',
+  styles: ['agm-map { height: 300px; /* height is required */ }'],
   templateUrl: './observatorio-update.component.html'
 })
 export class ObservatorioUpdateComponent implements OnInit {
   observatorio: IObservatorio;
   isSaving: boolean;
-
+  latitude: Number;
+  longitude: Number;
+  mapType = 'satellite';
   users: IUser[];
 
   aves: IAve[];
@@ -26,8 +29,6 @@ export class ObservatorioUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     nombre: [null, [Validators.required]],
-    latitud: [null, [Validators.required]],
-    longitud: [null, [Validators.required]],
     descripcion: [],
     foto: [],
     fotoContentType: [],
@@ -51,6 +52,13 @@ export class ObservatorioUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ observatorio }) => {
       this.updateForm(observatorio);
       this.observatorio = observatorio;
+      if (this.observatorio.latitud == undefined) {
+        this.latitude = 43.524163;
+        this.longitude = -5.615905;
+      } else {
+        this.latitude = Number(observatorio.latitud);
+        this.longitude = Number(observatorio.longitud);
+      }
     });
     this.userService
       .query()
@@ -72,14 +80,17 @@ export class ObservatorioUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: observatorio.id,
       nombre: observatorio.nombre,
-      latitud: observatorio.latitud,
-      longitud: observatorio.longitud,
       descripcion: observatorio.descripcion,
       foto: observatorio.foto,
       fotoContentType: observatorio.fotoContentType,
       autor: observatorio.autor,
       aves: observatorio.aves
     });
+  }
+
+  onChooseLocation(event) {
+    this.latitude = event.coords.lat;
+    this.longitude = event.coords.lng;
   }
 
   byteSize(field) {
@@ -131,6 +142,8 @@ export class ObservatorioUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const observatorio = this.createFromForm();
+    observatorio.latitud = this.latitude.toString();
+    observatorio.longitud = this.longitude.toString();
     if (observatorio.id !== undefined) {
       this.subscribeToSaveResponse(this.observatorioService.update(observatorio));
     } else {
@@ -143,8 +156,6 @@ export class ObservatorioUpdateComponent implements OnInit {
       ...new Observatorio(),
       id: this.editForm.get(['id']).value,
       nombre: this.editForm.get(['nombre']).value,
-      latitud: this.editForm.get(['latitud']).value,
-      longitud: this.editForm.get(['longitud']).value,
       descripcion: this.editForm.get(['descripcion']).value,
       fotoContentType: this.editForm.get(['fotoContentType']).value,
       foto: this.editForm.get(['foto']).value,
