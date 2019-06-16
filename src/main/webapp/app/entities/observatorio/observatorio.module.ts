@@ -22,7 +22,7 @@ const ENTITY_STATES = [...observatorioRoute, ...observatorioPopupRoute];
     PillalasAlVueloSharedModule,
     RouterModule.forChild(ENTITY_STATES),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA3oNg0Hg98Mscqm-9I-HxTV-q-Wu7vMTI'
+      apiKey: 'AIzaSyCTPTnX9nMnzERAdTxnhyLOKlwGmOyOsvk'
     })
   ],
   declarations: [
