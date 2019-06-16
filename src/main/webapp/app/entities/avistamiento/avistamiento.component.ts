@@ -13,12 +13,14 @@ import { AvistamientoService } from './avistamiento.service';
 
 @Component({
   selector: 'jhi-avistamiento',
+  styles: ['agm-map { height: 300px; /* height is required */ }'],
   templateUrl: './avistamiento.component.html'
 })
 export class AvistamientoComponent implements OnInit, OnDestroy {
   currentAccount: IUser;
   canEdit: boolean;
   avistamientos: IAvistamiento[];
+  allAvs: IAvistamiento[];
   error: any;
   success: any;
   eventSubscriber: Subscription;
@@ -30,6 +32,9 @@ export class AvistamientoComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  latitude: Number;
+  longitude: Number;
+  mapType = 'satellite';
 
   constructor(
     protected avistamientoService: AvistamientoService,
@@ -61,6 +66,7 @@ export class AvistamientoComponent implements OnInit, OnDestroy {
         (res: HttpResponse<IAvistamiento[]>) => this.paginateAvistamientos(res.body, res.headers),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+    this.avistamientoService.query().subscribe((res: HttpResponse<IAvistamiento[]>) => (this.allAvs = res.body));
   }
 
   loadPage(page: number) {
@@ -101,6 +107,8 @@ export class AvistamientoComponent implements OnInit, OnDestroy {
       this.canEditorDelete();
     });
     this.registerChangeInAvistamientos();
+    this.latitude = 43.25164798997068;
+    this.longitude = -5.78615017059326;
   }
 
   ngOnDestroy() {

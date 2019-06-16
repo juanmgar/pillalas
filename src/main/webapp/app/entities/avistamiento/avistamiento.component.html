@@ -10,11 +10,18 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
+    <agm-map [latitude]="latitude" [longitude]="longitude">
+            <agm-marker *ngFor="let marker of allAvs" [latitude]="marker.latitud" [longitude]="marker.longitud"
+                [label]="'Av'">
+                <agm-info-window [disableAutoPan]="true">
+                        <a [routerLink]="['/avistamiento', marker.id, 'view' ]">Ver más información del Avistamiento: {{marker.nombre}}</a>
+                </agm-info-window>
+            </agm-marker>
+        </agm-map>
     <div class="table-responsive" *ngIf="avistamientos">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nombre"><span jhiTranslate="pillalasAlVueloApp.avistamiento.nombre">Nombre</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fecha"><span jhiTranslate="pillalasAlVueloApp.avistamiento.fecha">Fecha</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="descripcion"><span jhiTranslate="pillalasAlVueloApp.avistamiento.descripcion">Descripcion</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -24,7 +31,6 @@
             </thead>
             <tbody>
             <tr *ngFor="let avistamiento of avistamientos ;trackBy: trackId">
-                <td><a [routerLink]="['/avistamiento', avistamiento.id, 'view' ]">{{avistamiento.id}}</a></td>
                 <td>{{avistamiento.nombre}}</td>
                 <td>{{avistamiento.fecha | date:'medium'}}</td>
                 <td>{{avistamiento.descripcion}}</td>

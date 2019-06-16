@@ -5,16 +5,16 @@
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
-    "question": "¿Te gustan las aves...? En esta web podrás:",
+    "question": "Do you like birds ...? On this website you can:",
     "link": {
-      "aves": "Consultar un listado con datos de distintas especies",
-      "observatorios": "Localizar los mejores lugares para ver aves en nuestra lista de observatorios",
+      "aves": "Consult a list with data of different species",
+      "observatorios": "Locate the best places to see birds in our list of observatories",
       "bugtracker": "JHipster seguimiento de errores",
-      "colaborar": "Colaborar con la comunidad añadiendo nuevas especies, observatorios y fotografías",
+      "colaborar": "Collaborate with the community by adding new species, observatories and photographs",
       "help": "contacto @java_hipster en Twitter",
-      "avistamientos": "Anotar todos tus avistamientos"
+      "avistamientos": "Record all your sightings"
     },
-    "more": "Además los usuarios registrados pueden...",
+    "more": "In addition, registered users can ...",
     "resultados": "Search results",
     "noresultados": "There's no results",
     "placeholder": "Search for birds or observation posts"

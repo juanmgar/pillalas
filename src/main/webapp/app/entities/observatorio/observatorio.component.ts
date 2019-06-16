@@ -13,11 +13,13 @@ import { ObservatorioService } from './observatorio.service';
 
 @Component({
   selector: 'jhi-observatorio',
+  styles: ['agm-map { height: 300px; /* height is required */ }'],
   templateUrl: './observatorio.component.html'
 })
 export class ObservatorioComponent implements OnInit, OnDestroy {
   currentAccount: any;
   observatorios: IObservatorio[];
+  allObs: IObservatorio[];
   error: any;
   success: any;
   eventSubscriber: Subscription;
@@ -29,6 +31,9 @@ export class ObservatorioComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  latitude: Number;
+  longitude: Number;
+  mapType = 'satellite';
 
   constructor(
     protected observatorioService: ObservatorioService,
@@ -60,6 +65,7 @@ export class ObservatorioComponent implements OnInit, OnDestroy {
         (res: HttpResponse<IObservatorio[]>) => this.paginateObservatorios(res.body, res.headers),
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+    this.observatorioService.query().subscribe((res: HttpResponse<IObservatorio[]>) => (this.allObs = res.body));
   }
 
   loadPage(page: number) {
@@ -102,6 +108,8 @@ export class ObservatorioComponent implements OnInit, OnDestroy {
       this.currentAccount = account;
     });
     this.registerChangeInObservatorios();
+    this.latitude = 43.25164798997068;
+    this.longitude = -5.78615017059326;
   }
 
   ngOnDestroy() {

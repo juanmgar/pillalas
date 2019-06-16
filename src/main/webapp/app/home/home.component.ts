@@ -64,7 +64,10 @@ export class HomeComponent implements OnInit {
         .subscribe((res: HttpResponse<Ave[]>) => (this.results = res.body), (res: HttpErrorResponse) => this.onError(res.message));
       this.observatorioService
         .findTextos(this.searchString)
-        .subscribe((res: HttpResponse<Ave[]>) => (this.resultsObs = res.body), (res: HttpErrorResponse) => this.onError(res.message));
+        .subscribe(
+          (res: HttpResponse<Observatorio[]>) => (this.resultsObs = res.body),
+          (res: HttpErrorResponse) => this.onError(res.message)
+        );
       this.resultsVisible = true;
     }
   }
