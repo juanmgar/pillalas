@@ -2,7 +2,7 @@
   "pillalasAlVueloApp": {
     "fotografia": {
       "home": {
-        "title": "Photographies",
+        "title": "Photographs",
         "createLabel": "Upload a new Photography",
         "createOrEditLabel": "Upload or edit a Photography"
       },

@@ -6,7 +6,7 @@
       "403": "You are not authorized yet to access this page.",
       "404": "The page does not exist.",
       "405": "The HTTP verb you used is not supported for this URL.",
-      "500": "Internal server error."
+      "500": "This entry can not be deleted because it is being used by other users. Contact the admin"
     },
     "messages": {
       "link": "Create a new account",

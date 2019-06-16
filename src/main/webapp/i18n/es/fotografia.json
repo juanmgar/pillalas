@@ -2,18 +2,18 @@
   "pillalasAlVueloApp": {
     "fotografia": {
       "home": {
-        "title": "Fotografias",
-        "createLabel": "Subir nueva Fotografia",
-        "createOrEditLabel": "Subir o editar Fotografia"
+        "title": "Fotografías",
+        "createLabel": "Subir nueva Fotografía",
+        "createOrEditLabel": "Subir o editar Fotografía"
       },
-      "created": "Una nueva Fotografia ha sido subida con el identificador {{ param }}",
-      "updated": "Una Fotografia ha sido actualizada con el identificador {{ param }}",
-      "deleted": "Una Fotografia ha sido eliminada con el identificador {{ param }}",
+      "created": "Una nueva Fotografía ha sido subida con el identificador {{ param }}",
+      "updated": "Una Fotografía ha sido actualizada con el identificador {{ param }}",
+      "deleted": "Una Fotografía ha sido eliminada con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Fotografia {{ id }}?"
+        "question": "¿Seguro que quiere eliminar Fotografía {{ id }}?"
       },
       "detail": {
-        "title": "Fotografia"
+        "title": "Fotografía"
       },
       "nombre": "Nombre",
       "fichero": "Fichero",
