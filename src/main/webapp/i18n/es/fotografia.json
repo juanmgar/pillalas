@@ -3,12 +3,12 @@
     "fotografia": {
       "home": {
         "title": "Fotografias",
-        "createLabel": "Crear nuevo Fotografia",
-        "createOrEditLabel": "Crear o editar Fotografia"
+        "createLabel": "Subir nueva Fotografia",
+        "createOrEditLabel": "Subir o editar Fotografia"
       },
-      "created": "Un nuevo Fotografia ha sido creado con el identificador {{ param }}",
-      "updated": "Un Fotografia ha sido actualizado con el identificador {{ param }}",
-      "deleted": "Un Fotografia ha sido eliminado con el identificador {{ param }}",
+      "created": "Una nueva Fotografia ha sido subida con el identificador {{ param }}",
+      "updated": "Una Fotografia ha sido actualizada con el identificador {{ param }}",
+      "deleted": "Una Fotografia ha sido eliminada con el identificador {{ param }}",
       "delete": {
         "question": "¿Seguro que quiere eliminar Fotografia {{ id }}?"
       },
@@ -20,7 +20,7 @@
       "avistamiento": "Avistamiento",
       "observatorio": "Observatorio",
       "autor": "Autor",
-      "ave": "Ave"
+      "ave": "Aves Observadas"
     }
   }
 }

@@ -2,25 +2,25 @@
   "pillalasAlVueloApp": {
     "fotografia": {
       "home": {
-        "title": "Fotografias",
-        "createLabel": "Create a new Fotografia",
-        "createOrEditLabel": "Create or edit a Fotografia"
+        "title": "Photographies",
+        "createLabel": "Upload a new Photography",
+        "createOrEditLabel": "Upload or edit a Photography"
       },
-      "created": "A new Fotografia is created with identifier {{ param }}",
-      "updated": "A Fotografia is updated with identifier {{ param }}",
-      "deleted": "A Fotografia is deleted with identifier {{ param }}",
+      "created": "A new Photography is Uploaded with identifier {{ param }}",
+      "updated": "A Photography is updated with identifier {{ param }}",
+      "deleted": "A Photography is deleted with identifier {{ param }}",
       "delete": {
         "question": "Are you sure you want to delete Fotografia {{ id }}?"
       },
       "detail": {
-        "title": "Fotografia"
+        "title": "Photography"
       },
-      "nombre": "Nombre",
-      "fichero": "Fichero",
-      "avistamiento": "Avistamiento",
-      "observatorio": "Observatorio",
-      "autor": "Autor",
-      "ave": "Ave"
+      "nombre": "Name",
+      "fichero": "File",
+      "avistamiento": "Sighting",
+      "observatorio": "Observation post",
+      "autor": "Author",
+      "ave": "Birds"
     }
   }
 }
