@@ -26,13 +26,9 @@
                 <agm-map [latitude]="latitude" [longitude]="longitude">
                     <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
                 </agm-map>
-                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.latitud">Latitud</span></dt>
+                <dt class="mt-2"><span jhiTranslate="pillalasAlVueloApp.observatorio.latitud">Latitud</span> // <span jhiTranslate="pillalasAlVueloApp.observatorio.longitud">Longitud</span></dt>
                 <dd>
-                    <span>{{observatorio.latitud}}</span>
-                </dd>
-                <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.longitud">Longitud</span></dt>
-                <dd>
-                    <span>{{observatorio.longitud}}</span>
+                    <span>{{observatorio.latitud}}</span> // <span>{{observatorio.longitud}}</span>
                 </dd>
                 <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.ave">Aves que puedes encontrar</span></dt>
                 <dd>
