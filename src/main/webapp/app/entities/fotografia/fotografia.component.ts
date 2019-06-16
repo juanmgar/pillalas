@@ -29,6 +29,7 @@ export class FotografiaComponent implements OnInit, OnDestroy {
   predicate: any;
   previousPage: any;
   reverse: any;
+  canEdit: boolean;
 
   constructor(
     protected fotografiaService: FotografiaService,
@@ -96,6 +97,7 @@ export class FotografiaComponent implements OnInit, OnDestroy {
     this.loadAll();
     this.accountService.identity().then(account => {
       this.currentAccount = account;
+      this.canEditorDelete();
     });
     this.registerChangeInFotografias();
   }
@@ -126,6 +128,14 @@ export class FotografiaComponent implements OnInit, OnDestroy {
       result.push('id');
     }
     return result;
+  }
+
+  canEditorDelete() {
+    if (this.currentAccount.authorities.includes('ROLE_ADMIN')) {
+      this.canEdit = true;
+    } else {
+      this.canEdit == false;
+    }
   }
 
   protected paginateFotografias(data: IFotografia[], headers: HttpHeaders) {

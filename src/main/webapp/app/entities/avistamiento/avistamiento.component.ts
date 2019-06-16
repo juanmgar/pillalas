@@ -6,7 +6,7 @@ import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiParseLinks, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IAvistamiento } from 'app/shared/model/avistamiento.model';
-import { AccountService } from 'app/core';
+import { AccountService, IUser } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { AvistamientoService } from './avistamiento.service';
@@ -16,7 +16,8 @@ import { AvistamientoService } from './avistamiento.service';
   templateUrl: './avistamiento.component.html'
 })
 export class AvistamientoComponent implements OnInit, OnDestroy {
-  currentAccount: any;
+  currentAccount: IUser;
+  canEdit: boolean;
   avistamientos: IAvistamiento[];
   error: any;
   success: any;
@@ -93,9 +94,11 @@ export class AvistamientoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.canEdit = false;
     this.loadAll();
     this.accountService.identity().then(account => {
       this.currentAccount = account;
+      this.canEditorDelete();
     });
     this.registerChangeInAvistamientos();
   }
@@ -126,6 +129,14 @@ export class AvistamientoComponent implements OnInit, OnDestroy {
       result.push('id');
     }
     return result;
+  }
+
+  canEditorDelete() {
+    if (this.currentAccount.authorities.includes('ROLE_ADMIN')) {
+      this.canEdit = true;
+    } else {
+      this.canEdit == false;
+    }
   }
 
   protected paginateAvistamientos(data: IAvistamiento[], headers: HttpHeaders) {
