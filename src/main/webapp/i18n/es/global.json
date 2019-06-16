@@ -135,5 +135,8 @@
     "idexists": "A new {{entityName}} cannot already have an ID",
     "idnull": "Invalid ID"
   },
-  "footer": "pie de página"
+  "footerredes": "Síguenos en nuestras redes: ",
+  "footer1": "Hecho con ",
+  "footer2": " en Gijón",
+  "footerEmail": "juanmgar@gmail.com"
 }

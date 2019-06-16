@@ -136,5 +136,8 @@
     "idexists": "A new {{ entityName }} cannot already have an ID",
     "idnull": "Invalid ID"
   },
-  "footer": "This is your footer"
+  "footerredes": "Follow us on our social networks: ",
+  "footer1": "Made with ",
+  "footer2": " in Gijón",
+  "footerEmail": "juanmgar@gmail.com"
 }

@@ -14,6 +14,9 @@
       "help": "contacto @java_hipster en Twitter",
       "avistamientos": "Anotar todos sus avistamientos"
     },
-    "more": "Además los usuarios registrados pueden..."
+    "more": "Además los usuarios registrados pueden...",
+    "resultados": "Resultados de la búsqueda",
+    "noresultados": "No se han encontrado resultados",
+    "placeholder": "Busca aves o puestos de observación"
   }
 }

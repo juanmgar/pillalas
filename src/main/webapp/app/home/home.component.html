@@ -10,7 +10,7 @@
 
         <div class="buscador m-2 p-3">
             <input class="buscador" autocomplete="false" type="text" (keyup)="autocomplete()"
-                class="form-control col-12 mb-1" id="searchString" placeholder="Busca aves u observatorios..." autofocus
+                class="form-control col-12 mb-1" id="searchString" placeholder="{{ 'home.placeholder' | translate }}" autofocus
                 name="searchString" [(ngModel)]="searchString" />
         </div>
     </div>
@@ -18,22 +18,29 @@
 
 <div class="justify-content-center p-2">
     <div *ngIf="resultsVisible && searchString" class="border align-content">
-        <h3 class="text-center">Resultado de la búsqueda</h3>
+        <h3 class="text-center" jhiTranslate="home.resultados">Resultado de la búsqueda</h3>
         <hr>
         </br>
         <div *ngIf="(results && results.length > 0) || (resultsObs && resultsObs.length > 0)">
             <span *ngFor="let resultsNext of results ;let i = index">
-                <a [routerLink]="['/ave', resultsNext.id, 'view' ]"><img
+                <a [routerLink]="['/ave', resultsNext.id, 'view' ]">
+                    <img *ngIf="resultsNext.foto"
                         [src]="'data:' + resultsNext.fotoContentType + ';base64,' + resultsNext.foto"
                         class="img-thumbnail img-fluid col-2" alt="image" />
+                    <img *ngIf="!resultsNext.foto" src="../../content/images/no-img.png"
+                        class="img-thumbnail img-fluid col-2" alt="image" />
+
                 </a><button type="submit" [routerLink]="['/ave', resultsNext.id, 'view' ]" class="btn btn-info btn-sm">
                     {{resultsNext.nombreComun}}
                     <fa-icon [icon]="'eye'"></fa-icon>
                 </button>
             </span>
             <span *ngFor="let resultsNext of resultsObs ;let i = index">
-                <a [routerLink]="['/observatorio', resultsNext.id, 'view' ]"><img
+                <a [routerLink]="['/observatorio', resultsNext.id, 'view' ]">
+                    <img *ngIf="resultsNext.foto"
                         [src]="'data:' + resultsNext.fotoContentType + ';base64,' + resultsNext.foto"
+                        class="img-thumbnail img-fluid col-2" alt="image" />
+                    <img *ngIf="!resultsNext.foto" src="../../content/images/no-img.png"
                         class="img-thumbnail img-fluid col-2" alt="image" />
                 </a><button type="submit" [routerLink]="['/observatorio', resultsNext.id, 'view' ]"
                     class="btn btn-info btn-sm">
@@ -43,7 +50,7 @@
             </span>
         </div>
         <div class="p-3" *ngIf="(results && results.length == 0) && (resultsObs && resultsObs.length == 0)">
-            <p>No se han encontrado resultados</p>
+            <p jhiTranslate="home.noresultados">No se han encontrado resultados</p>
         </div>
 
     </div>
