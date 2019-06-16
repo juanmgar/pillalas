@@ -47,13 +47,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.fotografia.autor" for="field_autor">Autor</label>
-                    <select class="form-control" id="field_autor" name="autor" formControlName="autor">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === editForm.get('autor').value?.id ? editForm.get('autor').value : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label jhiTranslate="pillalasAlVueloApp.fotografia.ave" for="field_aves">Ave</label>
                     <select class="form-control" id="field_aves" multiple name="aves" formControlName="aves">
                         <option [ngValue]="getSelected(editForm.get('aves').value, aveOption)" *ngFor="let aveOption of aves; trackBy: trackAveById">{{aveOption.nombreComun}}</option>

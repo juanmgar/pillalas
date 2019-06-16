@@ -23,6 +23,9 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
+                <agm-map [latitude]="latitude" [longitude]="longitude">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                </agm-map>
                 <dt><span jhiTranslate="pillalasAlVueloApp.observatorio.latitud">Latitud</span></dt>
                 <dd>
                     <span>{{observatorio.latitud}}</span>
@@ -46,10 +49,6 @@
                     </span>
                 </dd>
             </dl>
-
-            <agm-map [latitude]="latitude" [longitude]="longitude">
-                <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-            </agm-map>
 
             <button type="submit" (click)="previousState()" class="btn btn-info mt-2">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>

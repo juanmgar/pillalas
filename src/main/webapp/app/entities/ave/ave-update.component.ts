@@ -7,7 +7,7 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IAve, Ave } from 'app/shared/model/ave.model';
 import { AveService } from './ave.service';
-import { IUser, UserService } from 'app/core';
+import { IUser, UserService, AccountService } from 'app/core';
 import { IFotografia } from 'app/shared/model/fotografia.model';
 import { FotografiaService } from 'app/entities/fotografia';
 import { IObservatorio } from 'app/shared/model/observatorio.model';
@@ -24,6 +24,7 @@ export class AveUpdateComponent implements OnInit {
   isSaving: boolean;
 
   users: IUser[];
+  currentAccount: IUser;
 
   fotografias: IFotografia[];
 
@@ -39,8 +40,7 @@ export class AveUpdateComponent implements OnInit {
     foto: [],
     fotoContentType: [],
     sonido: [],
-    sonidoContentType: [],
-    autor: []
+    sonidoContentType: []
   });
 
   constructor(
@@ -53,7 +53,8 @@ export class AveUpdateComponent implements OnInit {
     protected avistamientoService: AvistamientoService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected accountService: AccountService
   ) {}
 
   ngOnInit() {
@@ -90,6 +91,9 @@ export class AveUpdateComponent implements OnInit {
         map((response: HttpResponse<IAvistamiento[]>) => response.body)
       )
       .subscribe((res: IAvistamiento[]) => (this.avistamientos = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
   }
 
   updateForm(ave: IAve) {
@@ -101,8 +105,7 @@ export class AveUpdateComponent implements OnInit {
       foto: ave.foto,
       fotoContentType: ave.fotoContentType,
       sonido: ave.sonido,
-      sonidoContentType: ave.sonidoContentType,
-      autor: ave.autor
+      sonidoContentType: ave.sonidoContentType
     });
   }
 
@@ -155,6 +158,7 @@ export class AveUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const ave = this.createFromForm();
+    ave.autor = this.currentAccount;
     if (ave.id !== undefined) {
       this.subscribeToSaveResponse(this.aveService.update(ave));
     } else {
@@ -172,8 +176,7 @@ export class AveUpdateComponent implements OnInit {
       fotoContentType: this.editForm.get(['fotoContentType']).value,
       foto: this.editForm.get(['foto']).value,
       sonidoContentType: this.editForm.get(['sonidoContentType']).value,
-      sonido: this.editForm.get(['sonido']).value,
-      autor: this.editForm.get(['autor']).value
+      sonido: this.editForm.get(['sonido']).value
     };
     return entity;
   }

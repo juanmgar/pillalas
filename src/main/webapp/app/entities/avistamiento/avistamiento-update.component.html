@@ -52,17 +52,6 @@
                     <textarea class="form-control" name="descripcion" id="field_descripcion"
                         formControlName="descripcion"></textarea>
                 </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="pillalasAlVueloApp.avistamiento.autor"
-                        for="field_autor">Autor</label>
-                    <select class="form-control" id="field_autor" name="autor" formControlName="autor">
-                        <option [ngValue]="null"></option>
-                        <option
-                            [ngValue]="userOption.id === editForm.get('autor').value?.id ? editForm.get('autor').value : userOption"
-                            *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
-                    </select>
-                </div>
                 <div class="form-group">
                     <label jhiTranslate="pillalasAlVueloApp.avistamiento.ave" for="field_aves">Ave</label>
                     <select class="form-control" id="field_aves" multiple name="aves" formControlName="aves">

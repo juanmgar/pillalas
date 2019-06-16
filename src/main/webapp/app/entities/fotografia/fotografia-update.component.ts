@@ -11,7 +11,7 @@ import { IAvistamiento } from 'app/shared/model/avistamiento.model';
 import { AvistamientoService } from 'app/entities/avistamiento';
 import { IObservatorio } from 'app/shared/model/observatorio.model';
 import { ObservatorioService } from 'app/entities/observatorio';
-import { IUser, UserService } from 'app/core';
+import { IUser, UserService, AccountService } from 'app/core';
 import { IAve } from 'app/shared/model/ave.model';
 import { AveService } from 'app/entities/ave';
 
@@ -28,7 +28,7 @@ export class FotografiaUpdateComponent implements OnInit {
   observatorios: IObservatorio[];
 
   users: IUser[];
-
+  currentAccount: IUser;
   aves: IAve[];
 
   editForm = this.fb.group({
@@ -38,7 +38,6 @@ export class FotografiaUpdateComponent implements OnInit {
     ficheroContentType: [],
     avistamiento: [],
     observatorio: [],
-    autor: [],
     aves: []
   });
 
@@ -52,7 +51,8 @@ export class FotografiaUpdateComponent implements OnInit {
     protected aveService: AveService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected accountService: AccountService
   ) {}
 
   ngOnInit() {
@@ -89,6 +89,9 @@ export class FotografiaUpdateComponent implements OnInit {
         map((response: HttpResponse<IAve[]>) => response.body)
       )
       .subscribe((res: IAve[]) => (this.aves = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
   }
 
   updateForm(fotografia: IFotografia) {
@@ -99,7 +102,6 @@ export class FotografiaUpdateComponent implements OnInit {
       ficheroContentType: fotografia.ficheroContentType,
       avistamiento: fotografia.avistamiento,
       observatorio: fotografia.observatorio,
-      autor: fotografia.autor,
       aves: fotografia.aves
     });
   }
@@ -153,6 +155,7 @@ export class FotografiaUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const fotografia = this.createFromForm();
+    fotografia.autor = this.currentAccount;
     if (fotografia.id !== undefined) {
       this.subscribeToSaveResponse(this.fotografiaService.update(fotografia));
     } else {
@@ -169,7 +172,6 @@ export class FotografiaUpdateComponent implements OnInit {
       fichero: this.editForm.get(['fichero']).value,
       avistamiento: this.editForm.get(['avistamiento']).value,
       observatorio: this.editForm.get(['observatorio']).value,
-      autor: this.editForm.get(['autor']).value,
       aves: this.editForm.get(['aves']).value
     };
     return entity;

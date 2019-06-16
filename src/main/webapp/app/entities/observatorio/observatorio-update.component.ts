@@ -7,7 +7,7 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IObservatorio, Observatorio } from 'app/shared/model/observatorio.model';
 import { ObservatorioService } from './observatorio.service';
-import { IUser, UserService } from 'app/core';
+import { IUser, UserService, AccountService } from 'app/core';
 import { IAve } from 'app/shared/model/ave.model';
 import { AveService } from 'app/entities/ave';
 
@@ -23,7 +23,7 @@ export class ObservatorioUpdateComponent implements OnInit {
   longitude: Number;
   mapType = 'satellite';
   users: IUser[];
-
+  currentAccount: IUser;
   aves: IAve[];
 
   editForm = this.fb.group({
@@ -32,7 +32,6 @@ export class ObservatorioUpdateComponent implements OnInit {
     descripcion: [],
     foto: [],
     fotoContentType: [],
-    autor: [],
     aves: []
   });
 
@@ -44,7 +43,8 @@ export class ObservatorioUpdateComponent implements OnInit {
     protected aveService: AveService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected accountService: AccountService
   ) {}
 
   ngOnInit() {
@@ -74,6 +74,9 @@ export class ObservatorioUpdateComponent implements OnInit {
         map((response: HttpResponse<IAve[]>) => response.body)
       )
       .subscribe((res: IAve[]) => (this.aves = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
   }
 
   updateForm(observatorio: IObservatorio) {
@@ -83,7 +86,6 @@ export class ObservatorioUpdateComponent implements OnInit {
       descripcion: observatorio.descripcion,
       foto: observatorio.foto,
       fotoContentType: observatorio.fotoContentType,
-      autor: observatorio.autor,
       aves: observatorio.aves
     });
   }
@@ -144,6 +146,7 @@ export class ObservatorioUpdateComponent implements OnInit {
     const observatorio = this.createFromForm();
     observatorio.latitud = this.latitude.toString();
     observatorio.longitud = this.longitude.toString();
+    observatorio.autor = this.currentAccount;
     if (observatorio.id !== undefined) {
       this.subscribeToSaveResponse(this.observatorioService.update(observatorio));
     } else {
@@ -159,7 +162,6 @@ export class ObservatorioUpdateComponent implements OnInit {
       descripcion: this.editForm.get(['descripcion']).value,
       fotoContentType: this.editForm.get(['fotoContentType']).value,
       foto: this.editForm.get(['foto']).value,
-      autor: this.editForm.get(['autor']).value,
       aves: this.editForm.get(['aves']).value
     };
     return entity;

@@ -14,7 +14,6 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nombreComun"><span jhiTranslate="pillalasAlVueloApp.ave.nombreComun">Nombre Comun</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="nombreCientifico"><span jhiTranslate="pillalasAlVueloApp.ave.nombreCientifico">Nombre Cientifico</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th><span jhiTranslate="pillalasAlVueloApp.ave.foto">Foto</span></th>
@@ -24,7 +23,6 @@
             </thead>
             <tbody>
             <tr *ngFor="let ave of aves ;trackBy: trackId">
-                <td><a [routerLink]="['/ave', ave.id, 'view' ]">{{ave.id}}</a></td>
                 <td>{{ave.nombreComun}}</td>
                 <td><em>{{ave.nombreCientifico}}</em></td>
                 <td>

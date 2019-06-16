@@ -9,7 +9,7 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IAvistamiento, Avistamiento } from 'app/shared/model/avistamiento.model';
 import { AvistamientoService } from './avistamiento.service';
-import { IUser, UserService } from 'app/core';
+import { IUser, UserService, AccountService } from 'app/core';
 import { IAve } from 'app/shared/model/ave.model';
 import { AveService } from 'app/entities/ave';
 
@@ -26,6 +26,7 @@ export class AvistamientoUpdateComponent implements OnInit {
   mapType = 'satellite';
 
   users: IUser[];
+  currentAccount: IUser;
 
   aves: IAve[];
 
@@ -34,7 +35,6 @@ export class AvistamientoUpdateComponent implements OnInit {
     nombre: [null, [Validators.required]],
     fecha: [null, [Validators.required]],
     descripcion: [],
-    autor: [],
     aves: []
   });
 
@@ -45,7 +45,8 @@ export class AvistamientoUpdateComponent implements OnInit {
     protected userService: UserService,
     protected aveService: AveService,
     protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected accountService: AccountService
   ) {}
 
   ngOnInit() {
@@ -75,6 +76,9 @@ export class AvistamientoUpdateComponent implements OnInit {
         map((response: HttpResponse<IAve[]>) => response.body)
       )
       .subscribe((res: IAve[]) => (this.aves = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
   }
 
   updateForm(avistamiento: IAvistamiento) {
@@ -83,7 +87,6 @@ export class AvistamientoUpdateComponent implements OnInit {
       nombre: avistamiento.nombre,
       fecha: avistamiento.fecha != null ? avistamiento.fecha.format(DATE_TIME_FORMAT) : null,
       descripcion: avistamiento.descripcion,
-      autor: avistamiento.autor,
       aves: avistamiento.aves
     });
   }
@@ -132,6 +135,7 @@ export class AvistamientoUpdateComponent implements OnInit {
   save() {
     this.isSaving = true;
     const avistamiento = this.createFromForm();
+    avistamiento.autor = this.currentAccount;
     avistamiento.latitud = this.latitude.toString();
     avistamiento.longitud = this.longitude.toString();
     if (avistamiento.id !== undefined) {
@@ -148,7 +152,6 @@ export class AvistamientoUpdateComponent implements OnInit {
       nombre: this.editForm.get(['nombre']).value,
       fecha: this.editForm.get(['fecha']).value != null ? moment(this.editForm.get(['fecha']).value, DATE_TIME_FORMAT) : undefined,
       descripcion: this.editForm.get(['descripcion']).value,
-      autor: this.editForm.get(['autor']).value,
       aves: this.editForm.get(['aves']).value
     };
     return entity;
