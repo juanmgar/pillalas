@@ -40,8 +40,8 @@
     "form": {
       "username.label": "Usuario",
       "username.placeholder": "Nombre de usuario",
-      "currentpassword.label": "Current password",
-      "currentpassword.placeholder": "Current password",
+      "currentpassword.label": "Contraseña actual",
+      "currentpassword.placeholder": "Contraseña actual",
       "newpassword.label": "Nueva contraseña",
       "newpassword.placeholder": "Nueva contraseña",
       "confirmpassword.label": "Confirmación de la nueva contraseña",
