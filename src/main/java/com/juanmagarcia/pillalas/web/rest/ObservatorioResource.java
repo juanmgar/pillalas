@@ -117,15 +117,12 @@ public class ObservatorioResource {
         Page<Observatorio> page = observatorioService.findAll(pageable);
         List<Observatorio> observatorioList = page.getContent();
         List<Observatorio> observatorioResult = new ArrayList<Observatorio>();
+        text = text.toString().toLowerCase();
 
         for ( int i=0; i<observatorioList.size();i++){
-            int intIndex = observatorioList.get(i).getNombre().indexOf(text);
-          if(intIndex == - 1){
-            System.out.println("palabra no encontrada");
-          }else{
+            int intIndex = observatorioList.get(i).getNombre().toLowerCase().indexOf(text);
+          if(intIndex != - 1){
             observatorioResult.add(observatorioList.get(i));
-            System.out.println("palabra encontrada"
-             + intIndex);
           }
         }
         return ResponseEntity.ok().body(observatorioResult);

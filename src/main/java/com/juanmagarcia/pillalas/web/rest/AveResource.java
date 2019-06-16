@@ -111,15 +111,15 @@ public class AveResource {
         Page<Ave> page = aveService.findAll(pageable);
         List<Ave> aveList = page.getContent();
         List<Ave> aveListResult = new ArrayList<Ave>();
-
+        text = text.toString().toLowerCase();
+        int intIndex = -1;
         for ( int i=0; i<aveList.size();i++){
-            int intIndex = aveList.get(i).getNombreComun().indexOf(text);
-          if(intIndex == - 1){
-            System.out.println("palabra no encontrada");
-          }else{
+            intIndex = aveList.get(i).getNombreComun().toLowerCase().indexOf(text);
+            if(intIndex == -1){
+                intIndex = aveList.get(i).getNombreCientifico().toLowerCase().indexOf(text);
+            }
+          if(intIndex != - 1){
             aveListResult.add(aveList.get(i));
-            System.out.println("palabra encontrada"
-             + intIndex);
           }
         }
         return ResponseEntity.ok().body(aveListResult);
