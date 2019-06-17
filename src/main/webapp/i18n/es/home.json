@@ -17,6 +17,13 @@
     "more": "Además los usuarios registrados pueden...",
     "resultados": "Resultados de la búsqueda",
     "noresultados": "No se han encontrado resultados",
-    "placeholder": "Busca aves o puestos de observación"
+    "placeholder": "Busca aves o puestos de observación",
+    "faq": "FAQs",
+    "p1": "¿Puedo añadir o modificar sin estar registrado?",
+    "a1": "No, solo los usuarios registrados pueden modificar las fichas. Tampoco puedes eliminar nada, salvo las imágenes que hayas subido.",
+    "p2": "Me gustaría ayudar a la comunidad. ¿Cómo puedo empezar?",
+    "a2": "Tienes varias maneras de ayudarnos. La más sencilla es utilizar la web y hablar de nosotros en tus redes sociales. Si además, tienes información relacionada con las aves y quieres compartirla, regístrate y empieza a ayudar.",
+    "p3": "¿Cómo puedo contactar con el administrador?",
+    "a3": "Para ponerte en contacto con el administrador del site solo tienes que escribir un correo a nuestro "
   }
 }

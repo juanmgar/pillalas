@@ -17,6 +17,12 @@
     "more": "In addition, registered users can ...",
     "resultados": "Search results",
     "noresultados": "There's no results",
-    "placeholder": "Search for birds or observation posts"
+    "faq": "FAQs",
+    "p1": "Can I add or modify without being registered?",
+    "a1": "No, only registered users can modify the cards. You can not delete anything either, except for the images that you have uploaded.",
+    "p2": "I would like to help the community. How can I start?",
+    "a2": "You have several ways to help us. The simplest is to use the web and talk about us on your social networks. If you also have information related to the birds and want to share it, register and start helping.",
+    "p3": "How can I contact the administrator?",
+    "a3": "To get in touch with the administrator of the site you just have to write an email to our "
   }
 }
